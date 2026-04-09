@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workshop Report - Workshop Builder</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/report.css">
+</head>
+<body>
+    <div class="report-container">
+        <div class="report-header no-print">
+            <button class="btn-secondary" onclick="goBack()">← Back to Builder</button>
+            <button class="btn-primary" onclick="window.print()">🖨️ Print Report</button>
+        </div>
+
+        <div class="report-content">
+            <!-- Header -->
+            <header class="report-title">
+                <h1 id="reportTitle">Workshop Plan</h1>
+                <p class="report-date" id="reportDate"></p>
+            </header>
+
+            <!-- Executive Summary -->
+            <section class="report-section">
+                <h2>Executive Summary</h2>
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <strong>Client/Requestor</strong>
+                        <p id="clientName"></p>
+                    </div>
+                    <div class="summary-item">
+                        <strong>Workshop Type</strong>
+                        <p id="workshopType"></p>
+                    </div>
+                    <div class="summary-item">
+                        <strong>Participants</strong>
+                        <p id="participantCount"></p>
+                    </div>
+                    <div class="summary-item">
+                        <strong>Total Duration</strong>
+                        <p id="totalDuration"></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Workshop Goals -->
+            <section class="report-section">
+                <h2>Workshop Goals</h2>
+                <div id="goalsContent"></div>
+            </section>
+
+            <!-- Agenda Checklist -->
+            <section class="report-section">
+                <h2>Agenda Checklist</h2>
+                <div id="agendaChecklist"></div>
+            </section>
+
+            <!-- Detailed Schedule -->
+            <section class="report-section">
+                <h2>Detailed Schedule</h2>
+                <div id="detailedSchedule"></div>
+            </section>
+
+            <!-- Participant Roster -->
+            <section class="report-section">
+                <h2>Participant Roster</h2>
+                <p class="section-note">Fill in participant names before or during the workshop</p>
+                <div class="participant-grid" id="participantGrid"></div>
+            </section>
+
+            <!-- Materials Needed -->
+            <section class="report-section">
+                <h2>Materials & Preparation</h2>
+                <div id="materialsContent"></div>
+            </section>
+
+            <!-- Post-Workshop Notes -->
+            <section class="report-section">
+                <h2>Post-Workshop Actions</h2>
+                <p class="section-note">To be completed during the workshop's Action Board (1-3-5 Breakdown) activity</p>
+                <div class="action-grid">
+                    <div class="action-column">
+                        <h3>1 Week</h3>
+                        <ul class="action-list">
+                            <li class="empty-action">_______________________________</li>
+                            <li class="empty-action">_______________________________</li>
+                            <li class="empty-action">_______________________________</li>
+                        </ul>
+                    </div>
+                    <div class="action-column">
+                        <h3>3 Weeks</h3>
+                        <ul class="action-list">
+                            <li class="empty-action">_______________________________</li>
+                            <li class="empty-action">_______________________________</li>
+                            <li class="empty-action">_______________________________</li>
+                        </ul>
+                    </div>
+                    <div class="action-column">
+                        <h3>5 Weeks</h3>
+                        <ul class="action-list">
+                            <li class="empty-action">_______________________________</li>
+                            <li class="empty-action">_______________________________</li>
+                            <li class="empty-action">_______________________________</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script src="js/storage.js"></script>
+    <script src="js/report.js"></script>
+</body>
+</html>

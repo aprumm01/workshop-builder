@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workshop Questionnaire - Workshop Builder</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/questionnaire.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Workshop Questionnaire</h1>
+            <p class="subtitle" id="workshopTypeLabel">Strategy Workshop</p>
+        </header>
+
+        <main>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+
+            <form id="questionnaireForm">
+                <!-- Section 1: Context -->
+                <section class="question-section active" data-section="1">
+                    <h2>📋 Workshop Context</h2>
+                    <p class="section-description">Let's understand the background and purpose of this workshop.</p>
+
+                    <div class="form-group">
+                        <label for="clientName">Who is requesting this workshop?</label>
+                        <input type="text" id="clientName" required placeholder="e.g., Sarah Johnson, Product Team Lead">
+                        <small>This is the person or team asking for the workshop</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="projectContext">What project or initiative is this for?</label>
+                        <textarea id="projectContext" rows="3" required placeholder="Brief description of the project"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="workshopGoals">What are the main goals for this workshop?</label>
+                        <textarea id="workshopGoals" rows="4" required placeholder="What do you want to accomplish?"></textarea>
+                        <small>Be specific - this helps us recommend the right activities</small>
+                    </div>
+                </section>
+
+                <!-- Section 2: Team & Timing -->
+                <section class="question-section" data-section="2">
+                    <h2>👥 Team & Schedule</h2>
+                    <p class="section-description">Understanding your team size and available time.</p>
+
+                    <div class="form-group">
+                        <label for="participantCount">How many participants? (including facilitator)</label>
+                        <input type="number" id="participantCount" min="3" max="30" required value="8">
+                        <small>Most workshops work best with 6-12 people</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>How much time do you have available?</label>
+                        <div class="time-selector">
+                            <div class="radio-group">
+                                <label class="radio-card">
+                                    <input type="radio" name="duration" value="half-day" required>
+                                    <span class="radio-content">
+                                        <strong>Half Day</strong>
+                                        <small>2-3 hours</small>
+                                    </span>
+                                </label>
+                                <label class="radio-card">
+                                    <input type="radio" name="duration" value="full-day" checked>
+                                    <span class="radio-content">
+                                        <strong>Full Day</strong>
+                                        <small>4-6 hours</small>
+                                    </span>
+                                </label>
+                                <label class="radio-card">
+                                    <input type="radio" name="duration" value="multi-day">
+                                    <span class="radio-content">
+                                        <strong>Multiple Days</strong>
+                                        <small>2+ days</small>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="multiDayDetails" style="display: none;">
+                        <label for="numberOfDays">How many days?</label>
+                        <input type="number" id="numberOfDays" min="2" max="10" value="2">
+                        <small>You can spread these across multiple weeks</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="workshopDate">Target workshop date (optional)</label>
+                        <input type="date" id="workshopDate">
+                    </div>
+                </section>
+
+                <!-- Section 3: Team Readiness -->
+                <section class="question-section" data-section="3">
+                    <h2>🎯 Team Readiness</h2>
+                    <p class="section-description">A few questions to help us recommend the right approach.</p>
+
+                    <div class="form-group">
+                        <label>Does the team already have context on this project?</label>
+                        <div class="radio-group-simple">
+                            <label>
+                                <input type="radio" name="hasContext" value="yes" required>
+                                Yes - the team has been working on this
+                            </label>
+                            <label>
+                                <input type="radio" name="hasContext" value="no">
+                                No - this is new for most people
+                            </label>
+                            <label>
+                                <input type="radio" name="hasContext" value="partial">
+                                Partial - some people know, others don't
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Is there a clear decision-maker for this workshop?</label>
+                        <div class="radio-group-simple">
+                            <label>
+                                <input type="radio" name="hasDecider" value="yes" required>
+                                Yes - we have identified the Decider
+                            </label>
+                            <label>
+                                <input type="radio" name="hasDecider" value="no">
+                                No - needs to be identified
+                            </label>
+                        </div>
+                        <small class="info-box">⚠️ Every workshop needs a Decider - the person with authority to make final decisions</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>What specific activities are you interested in? (optional)</label>
+                        <div id="activityInterests" class="checkbox-grid">
+                            <!-- Will be populated by JS -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 4: Constraints -->
+                <section class="question-section" data-section="4">
+                    <h2>⚡ Constraints & Concerns</h2>
+                    <p class="section-description">Understanding what might get in the way helps us design better.</p>
+
+                    <div class="form-group">
+                        <label for="constraints">Any constraints or concerns?</label>
+                        <textarea id="constraints" rows="3" placeholder="e.g., tight timeline, remote participants, stakeholder skepticism"></textarea>
+                        <small>Technical limitations, scheduling challenges, team dynamics, etc.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Should this workshop happen?</label>
+                        <div class="warning-box">
+                            <p><strong>Consider carefully:</strong></p>
+                            <ul>
+                                <li>Will this workshop interrupt or disrupt current work?</li>
+                                <li>Is the timing right, or should it wait?</li>
+                                <li>Could this be solved without a workshop?</li>
+                                <li>Is the team ready for this conversation?</li>
+                            </ul>
+                        </div>
+                        <div class="radio-group-simple">
+                            <label>
+                                <input type="radio" name="shouldHappen" value="yes" required>
+                                Yes - this workshop is necessary and timely
+                            </label>
+                            <label>
+                                <input type="radio" name="shouldHappen" value="unsure">
+                                Unsure - I have concerns
+                            </label>
+                            <label>
+                                <input type="radio" name="shouldHappen" value="no">
+                                No - maybe we should reconsider
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="concernsDetails" style="display: none;">
+                        <label for="concernsText">What are your concerns?</label>
+                        <textarea id="concernsText" rows="3" placeholder="Share what's making you unsure"></textarea>
+                    </div>
+                </section>
+
+                <!-- Navigation -->
+                <div class="form-navigation">
+                    <button type="button" class="btn-secondary" id="prevBtn" onclick="changeSection(-1)" style="display: none;">← Previous</button>
+                    <button type="button" class="btn-primary" id="nextBtn" onclick="changeSection(1)">Next →</button>
+                    <button type="submit" class="btn-primary" id="submitBtn" style="display: none;">Get Recommendation →</button>
+                </div>
+            </form>
+        </main>
+
+        <footer>
+            <p><a href="index.html">← Back to Workshop Types</a></p>
+        </footer>
+    </div>
+
+    <script src="js/storage.js"></script>
+    <script src="js/questionnaire.js"></script>
+</body>
+</html>

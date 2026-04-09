@@ -1,0 +1,296 @@
+{
+  "templates": [
+    {
+      "id": "strategy-2day",
+      "name": "Strategy Workshop",
+      "workshopType": "strategy",
+      "description": "Two-day workshop for defining vision, goals, and strategic direction. Focuses on alignment and big-picture thinking.",
+      "duration": {
+        "days": 2,
+        "hoursPerDay": 4,
+        "totalHours": 8,
+        "flexible": true
+      },
+      "targetParticipants": {
+        "min": 6,
+        "max": 12,
+        "ideal": 8
+      },
+      "rationale": {
+        "why": "Strategy workshops need time for deep discussion, reflection, and alignment. Two days with a gap allows participants to process and come back with fresh perspective.",
+        "structure": "Day 1 focuses on understanding the current state and defining the vision. Day 2 focuses on making decisions and planning next steps."
+      },
+      "days": [
+        {
+          "day": 1,
+          "label": "Day 1: Understand & Define",
+          "phase": "collect-choose",
+          "totalMinutes": 240,
+          "activities": [
+            {
+              "id": "expert-interview",
+              "duration": 45,
+              "required": true,
+              "rationale": "Critical for gathering context and aligning on the problem space"
+            },
+            {
+              "id": "sailboat",
+              "duration": 35,
+              "required": false,
+              "rationale": "Helps identify what's working and what's holding the team back"
+            },
+            {
+              "id": "lightning-demos",
+              "duration": 60,
+              "required": false,
+              "rationale": "Inspiration from competitive landscape and existing patterns"
+            },
+            {
+              "id": "long-term-goal",
+              "duration": 35,
+              "required": true,
+              "rationale": "Sets the vision and key questions to answer"
+            },
+            {
+              "id": "map",
+              "duration": 30,
+              "required": false,
+              "rationale": "Organize ideas and find patterns"
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "label": "Day 2: Decide & Plan",
+          "phase": "choose-commit",
+          "totalMinutes": 240,
+          "activities": [
+            {
+              "id": "user-story-mapping",
+              "duration": 90,
+              "required": false,
+              "rationale": "Define scope and prioritize initiatives"
+            },
+            {
+              "id": "concept-creation",
+              "duration": 60,
+              "required": false,
+              "rationale": "Create tangible concepts to evaluate"
+            },
+            {
+              "id": "action-board",
+              "duration": 25,
+              "required": true,
+              "rationale": "Always required - defines next steps and accountability"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "iteration-1day",
+      "name": "Iteration Workshop",
+      "workshopType": "iteration",
+      "description": "Single-day workshop for sprint planning, retrospectives, or iteration reviews. Focuses on reflection and next steps.",
+      "duration": {
+        "days": 1,
+        "hoursPerDay": 4,
+        "totalHours": 4,
+        "flexible": true
+      },
+      "targetParticipants": {
+        "min": 4,
+        "max": 15,
+        "ideal": 8
+      },
+      "rationale": {
+        "why": "Iteration workshops are shorter and more tactical. Teams already have context, so we focus on reflection and planning.",
+        "structure": "Single day with retrospective, prioritization, and action planning."
+      },
+      "days": [
+        {
+          "day": 1,
+          "label": "Day 1: Reflect & Plan",
+          "phase": "collect-choose-commit",
+          "totalMinutes": 240,
+          "activities": [
+            {
+              "id": "sailboat",
+              "duration": 35,
+              "required": true,
+              "rationale": "Retrospective on what's helping and what's blocking"
+            },
+            {
+              "id": "ten-for-ten",
+              "duration": 25,
+              "required": false,
+              "rationale": "Quick ideation if team needs fresh ideas"
+            },
+            {
+              "id": "user-story-mapping",
+              "duration": 90,
+              "required": false,
+              "rationale": "Prioritize features for next sprint"
+            },
+            {
+              "id": "map",
+              "duration": 30,
+              "required": false,
+              "rationale": "Organize work or dependencies"
+            },
+            {
+              "id": "action-board",
+              "duration": 25,
+              "required": true,
+              "rationale": "Always required - defines next sprint actions"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "product-3day",
+      "name": "Product Workshop",
+      "workshopType": "product",
+      "description": "Three-day sprint-style workshop for product discovery and design. Follows a structured flow from problem to prototype.",
+      "duration": {
+        "days": 3,
+        "hoursPerDay": 4,
+        "totalHours": 12,
+        "flexible": true
+      },
+      "targetParticipants": {
+        "min": 5,
+        "max": 12,
+        "ideal": 7
+      },
+      "rationale": {
+        "why": "Product workshops need time for discovery, divergence, convergence, and creation. Three days allows full cycle from problem to testable concept.",
+        "structure": "Day 1: Understand. Day 2: Explore & Decide. Day 3: Prototype & Plan."
+      },
+      "days": [
+        {
+          "day": 1,
+          "label": "Day 1: Understand",
+          "phase": "collect",
+          "totalMinutes": 240,
+          "activities": [
+            {
+              "id": "expert-interview",
+              "duration": 45,
+              "required": true,
+              "rationale": "Gather context and align on problem"
+            },
+            {
+              "id": "lightning-demos",
+              "duration": 60,
+              "required": false,
+              "rationale": "Research competitive landscape"
+            },
+            {
+              "id": "long-term-goal",
+              "duration": 35,
+              "required": true,
+              "rationale": "Set vision and key questions"
+            },
+            {
+              "id": "map",
+              "duration": 30,
+              "required": false,
+              "rationale": "Organize problem space"
+            }
+          ]
+        },
+        {
+          "day": 2,
+          "label": "Day 2: Explore & Decide",
+          "phase": "collect-choose",
+          "totalMinutes": 240,
+          "activities": [
+            {
+              "id": "ten-for-ten",
+              "duration": 25,
+              "required": false,
+              "rationale": "Generate lots of ideas quickly"
+            },
+            {
+              "id": "user-story-mapping",
+              "duration": 90,
+              "required": false,
+              "rationale": "Prioritize features and scope"
+            },
+            {
+              "id": "concept-creation",
+              "duration": 60,
+              "required": true,
+              "rationale": "Create tangible concepts to evaluate"
+            }
+          ]
+        },
+        {
+          "day": 3,
+          "label": "Day 3: Prototype & Plan",
+          "phase": "create-commit",
+          "totalMinutes": 240,
+          "activities": [
+            {
+              "id": "storyboard",
+              "duration": 60,
+              "required": true,
+              "rationale": "Visualize user experience"
+            },
+            {
+              "id": "concept-creation",
+              "duration": 60,
+              "required": false,
+              "rationale": "Refine concepts or create prototype"
+            },
+            {
+              "id": "action-board",
+              "duration": 25,
+              "required": true,
+              "rationale": "Always required - plan next steps"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "anything-goes",
+      "name": "Anything Goes",
+      "workshopType": "anything-goes",
+      "description": "Blank canvas. Start with an empty timeline and build your own workshop from scratch using the activity toolbox.",
+      "duration": {
+        "days": 1,
+        "hoursPerDay": 4,
+        "totalHours": 4,
+        "flexible": true
+      },
+      "targetParticipants": {
+        "min": 3,
+        "max": 20,
+        "ideal": 10
+      },
+      "rationale": {
+        "why": "For experienced facilitators who want full control or for unique workshop types that don't fit standard templates.",
+        "structure": "Start with Action Board pre-added (always required), everything else is up to you."
+      },
+      "days": [
+        {
+          "day": 1,
+          "label": "Day 1: Your Workshop",
+          "phase": "custom",
+          "totalMinutes": 240,
+          "activities": [
+            {
+              "id": "action-board",
+              "duration": 25,
+              "required": true,
+              "rationale": "Always required - every workshop needs next steps"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

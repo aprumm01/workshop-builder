@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workshop Builder - Build Your Workshop</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/builder.css">
+</head>
+<body>
+    <div class="builder-container">
+        <!-- Sidebar: Activity Toolbox -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h3>🧰 Activity Toolbox</h3>
+                <p>Drag activities to your timeline</p>
+            </div>
+
+            <div class="phase-filter">
+                <button class="filter-btn active" data-phase="all">All</button>
+                <button class="filter-btn" data-phase="collect">Collect</button>
+                <button class="filter-btn" data-phase="choose">Choose</button>
+                <button class="filter-btn" data-phase="create">Create</button>
+                <button class="filter-btn" data-phase="commit">Commit</button>
+            </div>
+
+            <div class="toolbox-activities" id="toolboxActivities">
+                <!-- Activities loaded by JS -->
+            </div>
+
+            <div class="sidebar-footer">
+                <h4>4C's Checklist</h4>
+                <div class="checklist" id="fourCsChecklist">
+                    <label class="checklist-item">
+                        <input type="checkbox" id="check-collect" disabled>
+                        <span>📥 Collect</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox" id="check-choose" disabled>
+                        <span>🎯 Choose</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox" id="check-create" disabled>
+                        <span>✨ Create</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox" id="check-commit" disabled>
+                        <span>✅ Commit</span>
+                    </label>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content: Workshop Builder -->
+        <main class="builder-main">
+            <header class="builder-header">
+                <div class="header-left">
+                    <h1 id="workshopTitle">Workshop Builder</h1>
+                    <p class="client-info" id="clientInfo"></p>
+                </div>
+                <div class="header-right">
+                    <button class="btn-secondary" onclick="exportWorkshop()">💾 Export</button>
+                    <button class="btn-primary" onclick="generateReport()">📄 Generate Report</button>
+                </div>
+            </header>
+
+            <div class="workshop-timeline" id="workshopTimeline">
+                <!-- Days loaded by JS -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Activity Detail Modal -->
+    <div class="modal" id="activityModal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Activity Details</h2>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Content loaded by JS -->
+            </div>
+        </div>
+    </div>
+
+    <script src="js/storage.js"></script>
+    <script src="js/builder.js"></script>
+</body>
+</html>

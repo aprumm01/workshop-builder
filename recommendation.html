@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workshop Recommendation - Workshop Builder</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/recommendation.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Your Workshop Recommendation</h1>
+            <p class="subtitle">Based on your questionnaire responses</p>
+        </header>
+
+        <main>
+            <!-- Warnings/Alerts Section -->
+            <div id="alertsContainer"></div>
+
+            <!-- Workshop Summary Card -->
+            <section class="summary-card">
+                <div class="summary-header">
+                    <div class="workshop-icon" id="workshopIcon">🎯</div>
+                    <div>
+                        <h2 id="workshopTitle">Strategy Workshop</h2>
+                        <p class="client-name" id="clientName"></p>
+                    </div>
+                </div>
+                <div class="summary-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Duration</span>
+                        <span class="detail-value" id="durationValue">2 days, 8 hours total</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Participants</span>
+                        <span class="detail-value" id="participantsValue">8 people</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Target Date</span>
+                        <span class="detail-value" id="dateValue">TBD</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Rationale Section -->
+            <section class="rationale-section">
+                <h3>📝 Why This Structure</h3>
+                <div id="rationaleContent"></div>
+            </section>
+
+            <!-- Recommended Timeline -->
+            <section class="timeline-section">
+                <h3>🗓️ Recommended Timeline</h3>
+                <div id="timelineContainer"></div>
+            </section>
+
+            <!-- 4C's Coverage -->
+            <section class="coverage-section">
+                <h3>✓ 4C's Coverage</h3>
+                <p class="section-note">Every workshop should cover the 4C's: Collect, Choose, Create, Commit</p>
+                <div class="coverage-grid">
+                    <div class="coverage-item" data-phase="collect">
+                        <div class="phase-icon">📥</div>
+                        <h4>Collect</h4>
+                        <p id="collectActivities">Loading...</p>
+                    </div>
+                    <div class="coverage-item" data-phase="choose">
+                        <div class="phase-icon">🎯</div>
+                        <h4>Choose</h4>
+                        <p id="chooseActivities">Loading...</p>
+                    </div>
+                    <div class="coverage-item" data-phase="create">
+                        <div class="phase-icon">✨</div>
+                        <h4>Create</h4>
+                        <p id="createActivities">Loading...</p>
+                    </div>
+                    <div class="coverage-item" data-phase="commit">
+                        <div class="phase-icon">✅</div>
+                        <h4>Commit</h4>
+                        <p id="commitActivities">Loading...</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button class="btn-primary btn-large" onclick="acceptRecommendation()">
+                    Build This Workshop →
+                </button>
+                <button class="btn-secondary" onclick="goBack()">
+                    ← Adjust Questionnaire
+                </button>
+            </div>
+        </main>
+
+        <footer>
+            <p><a href="index.html">← Start Over</a></p>
+        </footer>
+    </div>
+
+    <script src="js/storage.js"></script>
+    <script src="js/recommendation.js"></script>
+</body>
+</html>

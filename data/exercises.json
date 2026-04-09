@@ -1,0 +1,392 @@
+{
+  "exercises": [
+    {
+      "id": "expert-interview",
+      "name": "Expert Interview",
+      "icon": "🔍",
+      "phase": "collect",
+      "duration": {
+        "min": 30,
+        "max": 60,
+        "default": 45
+      },
+      "description": "Capture key challenges, goals, and context from a subject matter expert or stakeholder. Perfect for understanding the problem space before diving into solutions.",
+      "bestFor": [
+        "Problem discovery",
+        "Stakeholder alignment",
+        "Context gathering",
+        "Understanding constraints"
+      ],
+      "notGoodFor": [
+        "Solution generation",
+        "Quick decisions",
+        "Large groups (10+)",
+        "Time-constrained workshops"
+      ],
+      "workshopPhases": ["beginning"],
+      "tags": ["stakeholder-input", "problem-framing", "alignment", "qualitative"],
+      "recommendIf": {
+        "workshopType": ["strategy", "product"],
+        "goals": ["alignment", "problem-definition", "stakeholder-buy-in"],
+        "participants": { "max": 12 },
+        "timeAvailable": { "min": 120 }
+      },
+      "materials": ["Sticky notes", "Sharpies", "Large paper or whiteboard"],
+      "steps": [
+        "Prepare 3-5 key questions in advance",
+        "Conduct 1-on-1 or small group interview (30-45 min)",
+        "Capture insights on sticky notes",
+        "Share highlights with full team",
+        "Identify themes and key takeaways"
+      ]
+    },
+    {
+      "id": "ten-for-ten",
+      "name": "10 for 10",
+      "icon": "⚡",
+      "phase": "collect",
+      "duration": {
+        "min": 20,
+        "max": 30,
+        "default": 25
+      },
+      "description": "Rapid-fire idea generation where each person creates 10 sketches in 10 minutes. Great for divergent thinking and getting lots of ideas on the table quickly.",
+      "bestFor": [
+        "Idea generation",
+        "Breaking creative blocks",
+        "Divergent thinking",
+        "Getting started quickly"
+      ],
+      "notGoodFor": [
+        "Detailed solution design",
+        "Technical feasibility assessment",
+        "Groups unfamiliar with sketching"
+      ],
+      "workshopPhases": ["beginning", "middle"],
+      "tags": ["ideation", "sketching", "divergent", "quick"],
+      "recommendIf": {
+        "workshopType": ["product", "iteration", "anything-goes"],
+        "goals": ["ideation", "exploration", "creative-thinking"],
+        "participants": { "min": 3, "max": 20 }
+      },
+      "materials": ["Paper", "Sharpies or pens", "Timer"],
+      "steps": [
+        "Set timer for 10 minutes",
+        "Each person sketches 10 different ideas (quick, rough)",
+        "No discussion during sketching",
+        "Share 1-2 favorites with group",
+        "Capture themes and standout concepts"
+      ]
+    },
+    {
+      "id": "sailboat",
+      "name": "Sailboat Retrospective",
+      "icon": "⛵",
+      "phase": "collect",
+      "duration": {
+        "min": 30,
+        "max": 45,
+        "default": 35
+      },
+      "description": "Visual metaphor activity for retrospectives. The sailboat represents your team/product, with wind (what's helping), anchors (what's holding you back), rocks (risks), and the island (goal).",
+      "bestFor": [
+        "Retrospectives",
+        "Team health checks",
+        "Iteration planning",
+        "Identifying blockers"
+      ],
+      "notGoodFor": [
+        "New teams (lacks shared context)",
+        "Strategy definition",
+        "Product discovery"
+      ],
+      "workshopPhases": ["beginning"],
+      "tags": ["retrospective", "team-health", "reflection", "visual"],
+      "recommendIf": {
+        "workshopType": ["iteration"],
+        "goals": ["retrospective", "team-alignment", "identify-blockers"],
+        "participants": { "min": 4, "max": 15 }
+      },
+      "materials": ["Large paper with sailboat drawn", "Sticky notes", "Sharpies", "Voting dots"],
+      "steps": [
+        "Draw sailboat diagram on large paper",
+        "Silent sticky note generation (5 min): Wind, Anchors, Rocks, Island",
+        "Place stickies on diagram",
+        "Group similar items",
+        "Dot vote on top priorities",
+        "Discuss top 3-5 items"
+      ]
+    },
+    {
+      "id": "lightning-demos",
+      "name": "Lightning Demos",
+      "icon": "💡",
+      "phase": "collect",
+      "duration": {
+        "min": 45,
+        "max": 90,
+        "default": 60
+      },
+      "description": "Quick demos of existing products, features, or concepts that inspire your solution. Each person shows examples they found (3 min each), team captures big ideas.",
+      "bestFor": [
+        "Inspiration gathering",
+        "Competitive analysis",
+        "Pattern recognition",
+        "Design direction"
+      ],
+      "notGoodFor": [
+        "Original/novel problem spaces",
+        "Highly technical workshops",
+        "Time-constrained sessions"
+      ],
+      "workshopPhases": ["beginning", "middle"],
+      "tags": ["research", "inspiration", "competitive", "patterns"],
+      "recommendIf": {
+        "workshopType": ["product", "strategy"],
+        "goals": ["inspiration", "competitive-research", "design-direction"],
+        "participants": { "min": 3, "max": 12 },
+        "timeAvailable": { "min": 180 }
+      },
+      "materials": ["Projector/screen", "Laptops", "Note-taking supplies"],
+      "steps": [
+        "Prep: Each person finds 2-3 examples before workshop",
+        "Each person presents examples (3 min each)",
+        "Capture 'big ideas' on sticky notes during demos",
+        "Group similar ideas",
+        "Identify patterns and standout concepts"
+      ]
+    },
+    {
+      "id": "user-story-mapping",
+      "name": "Applied User Story Mapping",
+      "icon": "🗺️",
+      "phase": "choose",
+      "duration": {
+        "min": 60,
+        "max": 120,
+        "default": 90
+      },
+      "description": "Collaborative activity mapping user journey with features organized by priority. Creates shared understanding of scope and sequencing.",
+      "bestFor": [
+        "Feature prioritization",
+        "Release planning",
+        "Scope definition",
+        "Team alignment on roadmap"
+      ],
+      "notGoodFor": [
+        "Early exploration",
+        "Problem discovery",
+        "Small feature additions"
+      ],
+      "workshopPhases": ["middle"],
+      "tags": ["prioritization", "planning", "user-journey", "scope"],
+      "recommendIf": {
+        "workshopType": ["product", "iteration"],
+        "goals": ["prioritization", "planning", "roadmap"],
+        "participants": { "min": 4, "max": 15 },
+        "timeAvailable": { "min": 240 }
+      },
+      "materials": ["Large wall space", "Sticky notes (multiple colors)", "Sharpies"],
+      "steps": [
+        "Map user journey horizontally (backbone)",
+        "Add user activities under each journey step",
+        "Prioritize vertically (top = must have, bottom = nice to have)",
+        "Draw release lines",
+        "Discuss and adjust",
+        "Document outcome"
+      ]
+    },
+    {
+      "id": "map",
+      "name": "Map",
+      "icon": "🗺️",
+      "phase": "choose",
+      "duration": {
+        "min": 20,
+        "max": 40,
+        "default": 30
+      },
+      "description": "Quick mapping exercise to organize ideas spatially. Can be used for journey maps, ecosystem maps, concept relationships, or any spatial organization.",
+      "bestFor": [
+        "Organizing ideas",
+        "Finding relationships",
+        "Spatial thinking",
+        "Quick synthesis"
+      ],
+      "notGoodFor": [
+        "Deep analysis",
+        "Detailed planning",
+        "Large datasets"
+      ],
+      "workshopPhases": ["middle"],
+      "tags": ["synthesis", "organization", "spatial", "quick"],
+      "recommendIf": {
+        "workshopType": ["strategy", "product", "anything-goes"],
+        "goals": ["synthesis", "organization", "patterns"],
+        "participants": { "min": 3, "max": 12 }
+      },
+      "materials": ["Large paper", "Sticky notes", "Sharpies"],
+      "steps": [
+        "Define axes or structure for map",
+        "Place sticky notes spatially",
+        "Adjust and refine positions",
+        "Draw connections",
+        "Identify clusters and patterns"
+      ]
+    },
+    {
+      "id": "long-term-goal",
+      "name": "Long Term Goal & Key Questions",
+      "icon": "🎯",
+      "phase": "choose",
+      "duration": {
+        "min": 30,
+        "max": 45,
+        "default": 35
+      },
+      "description": "Define where you want to be in 6 months, 1 year, or 2 years, then identify the key questions you need to answer to get there.",
+      "bestFor": [
+        "Strategy alignment",
+        "Vision setting",
+        "Identifying unknowns",
+        "Scoping research"
+      ],
+      "notGoodFor": [
+        "Tactical execution",
+        "Short-term iterations",
+        "Detail-oriented work"
+      ],
+      "workshopPhases": ["beginning"],
+      "tags": ["strategy", "vision", "alignment", "goals"],
+      "recommendIf": {
+        "workshopType": ["strategy", "product"],
+        "goals": ["vision", "alignment", "strategy"],
+        "participants": { "min": 4, "max": 15 }
+      },
+      "materials": ["Whiteboard or large paper", "Sticky notes", "Sharpies"],
+      "steps": [
+        "Write long-term goal (optimistic but realistic)",
+        "Silent generation: What questions must we answer?",
+        "Share and group questions",
+        "Prioritize top 3-5 questions",
+        "Discuss how to answer them"
+      ]
+    },
+    {
+      "id": "concept-creation",
+      "name": "Concept Creation",
+      "icon": "✨",
+      "phase": "create",
+      "duration": {
+        "min": 45,
+        "max": 90,
+        "default": 60
+      },
+      "description": "Small teams create detailed concept sketches or mockups. Teams of 2-3 work together to design a cohesive solution they can present.",
+      "bestFor": [
+        "Solution design",
+        "Detailed concepts",
+        "Team collaboration",
+        "Preparing for decisions"
+      ],
+      "notGoodFor": [
+        "Individual work",
+        "Early exploration",
+        "Large groups (15+)"
+      ],
+      "workshopPhases": ["middle", "end"],
+      "tags": ["design", "collaboration", "solution", "detailed"],
+      "recommendIf": {
+        "workshopType": ["product", "iteration"],
+        "goals": ["design", "solution", "prototype"],
+        "participants": { "min": 4, "max": 15 },
+        "timeAvailable": { "min": 180 }
+      },
+      "materials": ["Paper or whiteboard", "Sharpies", "Sticky notes"],
+      "steps": [
+        "Form teams of 2-3",
+        "Each team creates a concept (30-45 min)",
+        "Prepare 3-minute presentation",
+        "Present concepts to group",
+        "Capture feedback and questions"
+      ]
+    },
+    {
+      "id": "action-board",
+      "name": "Action Board (1-3-5 Breakdown)",
+      "icon": "📋",
+      "phase": "commit",
+      "duration": {
+        "min": 20,
+        "max": 30,
+        "default": 25
+      },
+      "description": "Post-workshop action planning. What will you do in 1 week, 3 weeks, and 5 weeks? Assigns owners and creates accountability.",
+      "bestFor": [
+        "Action planning",
+        "Accountability",
+        "Workshop closure",
+        "Follow-through"
+      ],
+      "notGoodFor": [
+        "Long-term strategy (use Long Term Goal instead)",
+        "Detailed project planning"
+      ],
+      "workshopPhases": ["end"],
+      "tags": ["action", "planning", "accountability", "closure"],
+      "recommendIf": {
+        "workshopType": ["strategy", "product", "iteration", "anything-goes"],
+        "goals": ["action-planning", "follow-through"],
+        "participants": { "min": 3, "max": 20 },
+        "alwaysInclude": true
+      },
+      "materials": ["Whiteboard or large paper", "Sticky notes", "Sharpies"],
+      "steps": [
+        "Create 3 columns: 1 week, 3 weeks, 5 weeks",
+        "Silent sticky generation: What actions need to happen?",
+        "Place stickies in appropriate columns",
+        "Assign owners to each action",
+        "Document and share with team"
+      ]
+    },
+    {
+      "id": "storyboard",
+      "name": "Storyboard",
+      "icon": "🎬",
+      "phase": "create",
+      "duration": {
+        "min": 45,
+        "max": 75,
+        "default": 60
+      },
+      "description": "Create a step-by-step visual story of how a user would experience your solution. Like a comic strip showing the key moments.",
+      "bestFor": [
+        "User experience design",
+        "Communication tool",
+        "Testing assumptions",
+        "Stakeholder alignment"
+      ],
+      "notGoodFor": [
+        "Technical architecture",
+        "Data modeling",
+        "System design"
+      ],
+      "workshopPhases": ["middle", "end"],
+      "tags": ["storytelling", "user-experience", "visual", "communication"],
+      "recommendIf": {
+        "workshopType": ["product", "strategy"],
+        "goals": ["user-experience", "storytelling", "communication"],
+        "participants": { "min": 3, "max": 12 },
+        "timeAvailable": { "min": 180 }
+      },
+      "materials": ["Storyboard template (6-8 panels)", "Sharpies", "Sticky notes"],
+      "steps": [
+        "Define user and scenario",
+        "Sketch 6-8 key moments",
+        "Add simple captions",
+        "Present to group",
+        "Refine based on feedback"
+      ]
+    }
+  ]
+}

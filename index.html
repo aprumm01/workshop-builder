@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workshop Builder</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Workshop Builder</h1>
+            <p class="subtitle">Design better workshops with structured guidance and intelligent recommendations</p>
+        </header>
+
+        <main>
+            <section class="intro">
+                <h2>What type of workshop are you facilitating?</h2>
+                <p>Choose a starting point below. Each workshop type has a guided questionnaire to help you design the right structure.</p>
+            </section>
+
+            <div class="workshop-types">
+                <div class="workshop-card" data-type="strategy">
+                    <div class="card-icon">🎯</div>
+                    <h3>Strategy</h3>
+                    <p>For vision setting, goal alignment, and strategic planning. Usually 2+ days with leadership and stakeholders.</p>
+                    <ul class="card-features">
+                        <li>Long-term vision and goals</li>
+                        <li>Stakeholder alignment</li>
+                        <li>Strategic decision-making</li>
+                    </ul>
+                    <button class="btn-primary" onclick="startQuestionnaire('strategy')">Start Strategy Workshop</button>
+                </div>
+
+                <div class="workshop-card" data-type="iteration">
+                    <div class="card-icon">🔄</div>
+                    <h3>Iteration</h3>
+                    <p>For sprint planning, retrospectives, and iteration reviews. Usually 1 day with the core team.</p>
+                    <ul class="card-features">
+                        <li>Sprint planning</li>
+                        <li>Retrospectives</li>
+                        <li>Tactical next steps</li>
+                    </ul>
+                    <button class="btn-primary" onclick="startQuestionnaire('iteration')">Start Iteration Workshop</button>
+                </div>
+
+                <div class="workshop-card" data-type="product">
+                    <div class="card-icon">🚀</div>
+                    <h3>Product</h3>
+                    <p>For product discovery, feature design, and prototyping. Usually 3+ days following a design sprint model.</p>
+                    <ul class="card-features">
+                        <li>Product discovery</li>
+                        <li>Feature design</li>
+                        <li>Prototyping and testing</li>
+                    </ul>
+                    <button class="btn-primary" onclick="startQuestionnaire('product')">Start Product Workshop</button>
+                </div>
+
+                <div class="workshop-card" data-type="anything-goes">
+                    <div class="card-icon">✨</div>
+                    <h3>Anything Goes</h3>
+                    <p>For custom workshops that don't fit the standard templates. Start with a blank canvas and build your own.</p>
+                    <ul class="card-features">
+                        <li>Full customization</li>
+                        <li>Experienced facilitators</li>
+                        <li>Unique workshop types</li>
+                    </ul>
+                    <button class="btn-secondary" onclick="startQuestionnaire('anything-goes')">Start Custom Workshop</button>
+                </div>
+            </div>
+
+            <section class="secondary-actions">
+                <div class="action-links">
+                    <a href="library.html" class="link-button">📚 Browse Exercise Library</a>
+                    <a href="#" class="link-button" onclick="loadWorkshop()">📂 Load Saved Workshop</a>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>Built for facilitators, by facilitators. <a href="#about">About</a> | <a href="#guide">Facilitation Guide</a></p>
+        </footer>
+    </div>
+
+    <script src="js/storage.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
