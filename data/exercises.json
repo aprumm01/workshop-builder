@@ -386,7 +386,208 @@
         "Add simple captions",
         "Present to group",
         "Refine based on feedback"
-      ]
+      ],
+      "relatedExercises": ["concept-creation"]
+    },
+    {
+      "id": "crazy-eights",
+      "name": "Crazy 8's",
+      "icon": "🎨",
+      "phase": "create",
+      "duration": {
+        "min": 15,
+        "max": 20,
+        "default": 18
+      },
+      "description": "Structured rapid ideation where each person creates 8 sketches in 8 minutes (1 minute per sketch). More focused than 10 for 10, forces quick decision-making and prevents overthinking.",
+      "bestFor": [
+        "Rapid ideation",
+        "Breaking analysis paralysis",
+        "Generating diverse concepts",
+        "Time-constrained workshops"
+      ],
+      "notGoodFor": [
+        "Detailed design work",
+        "Groups unfamiliar with sketching",
+        "Complex technical solutions"
+      ],
+      "workshopPhases": ["middle"],
+      "tags": ["ideation", "sketching", "rapid", "structured"],
+      "recommendIf": {
+        "workshopType": ["product", "iteration", "anything-goes"],
+        "goals": ["ideation", "exploration", "rapid-prototyping"],
+        "participants": { "min": 3, "max": 20 }
+      },
+      "materials": ["Paper (folded into 8 sections)", "Sharpies", "Timer"],
+      "steps": [
+        "Fold paper into 8 sections",
+        "Set timer for 8 minutes",
+        "Sketch one idea per section (1 min each)",
+        "No talking during sketching",
+        "Share top 2-3 ideas with group",
+        "Dot vote on strongest concepts"
+      ],
+      "relatedExercises": ["ten-for-ten", "concept-creation"]
+    },
+    {
+      "id": "how-might-we",
+      "name": "How Might We (HMW)",
+      "icon": "💭",
+      "phase": "choose",
+      "duration": {
+        "min": 20,
+        "max": 35,
+        "default": 25
+      },
+      "description": "Reframe problems into opportunities by converting insights into actionable 'How Might We' questions. Transforms constraints into creative challenges.",
+      "bestFor": [
+        "Problem reframing",
+        "Opening up solution space",
+        "Generating opportunity areas",
+        "Bridging problem to ideation"
+      ],
+      "notGoodFor": [
+        "When problem is not yet defined",
+        "Execution planning",
+        "Detailed design work"
+      ],
+      "workshopPhases": ["middle"],
+      "tags": ["problem-framing", "opportunity", "ideation-prep", "reframing"],
+      "recommendIf": {
+        "workshopType": ["strategy", "product", "anything-goes"],
+        "goals": ["problem-definition", "ideation", "opportunity-finding"],
+        "participants": { "min": 3, "max": 15 }
+      },
+      "materials": ["Sticky notes", "Sharpies", "Whiteboard"],
+      "steps": [
+        "Review problem statements or insights",
+        "Individually write HMW questions (start each with 'How might we...')",
+        "Share all HMWs on wall",
+        "Group similar questions",
+        "Dot vote on most promising opportunities",
+        "Select top 3-5 HMWs to explore"
+      ],
+      "relatedExercises": ["point-of-view", "long-term-goal"]
+    },
+    {
+      "id": "point-of-view",
+      "name": "Point of View Statement",
+      "icon": "👤",
+      "phase": "choose",
+      "duration": {
+        "min": 15,
+        "max": 25,
+        "default": 20
+      },
+      "description": "Craft a clear problem statement from the user's perspective using the format: [User] needs [need] because [insight]. Frames the problem before ideation.",
+      "bestFor": [
+        "Problem definition",
+        "User-centered framing",
+        "Aligning team on focus",
+        "Transition from research to ideation"
+      ],
+      "notGoodFor": [
+        "Early exploration",
+        "When user research is incomplete",
+        "Solution generation"
+      ],
+      "workshopPhases": ["beginning", "middle"],
+      "tags": ["problem-definition", "user-centered", "framing", "alignment"],
+      "recommendIf": {
+        "workshopType": ["product", "strategy"],
+        "goals": ["problem-definition", "alignment", "user-focus"],
+        "participants": { "min": 3, "max": 12 }
+      },
+      "materials": ["Whiteboard", "Sticky notes", "POV template"],
+      "steps": [
+        "Review user research and insights",
+        "Fill in POV template: [User] needs [need] because [insight]",
+        "Share POVs with group",
+        "Refine and combine similar statements",
+        "Select 1-2 POVs to focus on",
+        "Post POV prominently for reference"
+      ],
+      "relatedExercises": ["how-might-we", "expert-interview"]
+    },
+    {
+      "id": "empathy-map",
+      "name": "Empathy Map",
+      "icon": "🧠",
+      "phase": "collect",
+      "duration": {
+        "min": 25,
+        "max": 40,
+        "default": 30
+      },
+      "description": "Collaborative exercise mapping what users Say, Think, Do, and Feel, plus their Pains and Gains. Deeper and more structured than basic personas.",
+      "bestFor": [
+        "Building empathy",
+        "Synthesizing research",
+        "Understanding user motivations",
+        "Team alignment on user needs"
+      ],
+      "notGoodFor": [
+        "When no user research exists",
+        "Quick workshops",
+        "Solution generation"
+      ],
+      "workshopPhases": ["beginning"],
+      "tags": ["empathy", "user-research", "synthesis", "collaborative"],
+      "recommendIf": {
+        "workshopType": ["product", "strategy"],
+        "goals": ["user-research", "empathy", "synthesis"],
+        "participants": { "min": 3, "max": 12 }
+      },
+      "materials": ["Large empathy map template", "Sticky notes", "Sharpies", "User research data"],
+      "steps": [
+        "Draw empathy map with 4 quadrants: Say, Think, Do, Feel (+ Pains/Gains)",
+        "Review user research together",
+        "Individually add observations to each quadrant",
+        "Share and group similar insights",
+        "Identify key patterns and themes",
+        "Capture biggest pains and gains"
+      ],
+      "relatedExercises": ["expert-interview", "point-of-view"]
+    },
+    {
+      "id": "rrec-canvas",
+      "name": "Raise/Reduce/Eliminate/Create Canvas",
+      "icon": "📊",
+      "phase": "choose",
+      "duration": {
+        "min": 30,
+        "max": 45,
+        "default": 35
+      },
+      "description": "Strategic prioritization tool from Blue Ocean Strategy. Map features/attributes into 4 categories: what to Raise above industry standard, Reduce below standard, Eliminate completely, or Create as new differentiators.",
+      "bestFor": [
+        "Strategic differentiation",
+        "Feature prioritization",
+        "Competitive positioning",
+        "Innovation planning"
+      ],
+      "notGoodFor": [
+        "Early exploration",
+        "When competitive landscape is unknown",
+        "Tactical execution"
+      ],
+      "workshopPhases": ["middle"],
+      "tags": ["strategy", "prioritization", "competitive", "innovation"],
+      "recommendIf": {
+        "workshopType": ["strategy", "product"],
+        "goals": ["strategy", "differentiation", "prioritization"],
+        "participants": { "min": 4, "max": 15 }
+      },
+      "materials": ["Large canvas with 4 quadrants", "Sticky notes (4 colors)", "Sharpies"],
+      "steps": [
+        "List current features/attributes of your product",
+        "Identify competitor offerings",
+        "Place each attribute in quadrant: Raise, Reduce, Eliminate, Create",
+        "Discuss rationale for each placement",
+        "Vote on highest priority items in each quadrant",
+        "Define actions for top priorities"
+      ],
+      "relatedExercises": ["user-story-mapping", "long-term-goal"]
     }
   ]
 }

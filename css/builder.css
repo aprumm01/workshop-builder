@@ -381,3 +381,48 @@ body {
 .detail-section li {
     margin-bottom: 0.5rem;
 }
+
+.related-exercises {
+    background-color: var(--bg-light);
+    padding: 1rem;
+    border-radius: 0.375rem;
+    border: 1px solid var(--border);
+}
+
+.related-note {
+    color: var(--text-medium);
+    font-size: 0.875rem;
+    margin: 0.25rem 0 0.75rem 0;
+}
+
+.related-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.related-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    background-color: var(--bg-white);
+    border: 1px solid var(--border);
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.related-item:hover {
+    border-color: var(--primary);
+    background-color: #eff6ff;
+}
+
+.related-icon {
+    font-size: 1.25rem;
+}
+
+.related-name {
+    font-weight: 500;
+    color: var(--text-dark);
+}

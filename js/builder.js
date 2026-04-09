@@ -303,6 +303,31 @@ function showActivityDetails(exerciseId) {
     const modal = document.getElementById('activityModal');
     document.getElementById('modalTitle').textContent = exercise.icon + ' ' + exercise.name;
 
+    // Get related exercises
+    let relatedSection = '';
+    if (exercise.relatedExercises && exercise.relatedExercises.length > 0) {
+        const relatedExercises = exercise.relatedExercises
+            .map(id => exercises.find(e => e.id === id))
+            .filter(e => e);
+
+        if (relatedExercises.length > 0) {
+            relatedSection = `
+                <div class="detail-section related-exercises">
+                    <h3>🔗 Related Activities</h3>
+                    <p class="related-note">Consider these alternatives or follow-ups:</p>
+                    <div class="related-list">
+                        ${relatedExercises.map(related => `
+                            <div class="related-item" onclick="showActivityDetails('${related.id}')">
+                                <span class="related-icon">${related.icon}</span>
+                                <span class="related-name">${related.name}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+    }
+
     const modalBody = document.getElementById('modalBody');
     modalBody.innerHTML = `
         <div class="detail-section">
@@ -336,6 +361,7 @@ function showActivityDetails(exerciseId) {
                 ${exercise.steps.map(step => `<li>${step}</li>`).join('')}
             </ol>
         </div>
+        ${relatedSection}
     `;
 
     modal.style.display = 'flex';
