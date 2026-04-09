@@ -1,0 +1,49 @@
+{
+  "tokens": {
+    "colors": {
+      "primary": "#2563eb",
+      "primary-light": "#3b82f6",
+      "primary-dark": "#1d4ed8",
+      "accent": "#8b5cf6",
+      "success": "#10b981",
+      "warning": "#f59e0b",
+      "danger": "#ef4444"
+    },
+    "transitions": {
+      "fast": "150ms",
+      "normal": "250ms",
+      "slow": "350ms",
+      "ease": "cubic-bezier(0.4, 0, 0.2, 1)"
+    },
+    "shadows": {
+      "sm": "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+      "base": "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)",
+      "md": "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
+      "lg": "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
+      "xl": "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)"
+    },
+    "animations": {
+      "scale-up": "scale(1.02)",
+      "scale-down": "scale(0.98)",
+      "lift": "translateY(-4px)"
+    }
+  },
+  "patterns": {
+    "card-hover-lift": {
+      "description": "Subtle lift with enhanced shadow on hover",
+      "css": "transform: translateY(-4px); box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1)"
+    },
+    "button-press": {
+      "description": "Scale down on active state for tactile feedback",
+      "css": "transform: scale(0.98)"
+    },
+    "focus-ring": {
+      "description": "Accessible focus ring with primary color",
+      "css": "outline: 2px solid #2563eb; outline-offset: 2px"
+    },
+    "smooth-entrance": {
+      "description": "Fade and slide in animation",
+      "css": "animation: slideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
+    }
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "branch": "experimental-styles",
+  "created": "2026-04-09",
+  "project": "workshop-builder",
+  "components": {
+    "workshop-card": {
+      "enhanced": true,
+      "patterns": ["card-hover-lift", "gradient-top-border", "stagger-animation", "icon-bounce"],
+      "status": "complete",
+      "changes": [
+        "Added gradient top border that animates on hover",
+        "Enhanced shadow and lift effect (6px instead of 2px)",
+        "Added icon scale and rotation on hover",
+        "Staggered entrance animations for all 4 cards",
+        "Increased border radius for modern feel"
+      ]
+    },
+    "buttons": {
+      "enhanced": true,
+      "patterns": ["gradient-background", "button-press", "shadow-elevation"],
+      "status": "complete",
+      "changes": [
+        "Primary buttons now use gradient backgrounds",
+        "Added shadow elevation on hover",
+        "Scale-down effect on active state for tactile feedback",
+        "Smoother transitions with cubic-bezier easing"
+      ]
+    },
+    "header": {
+      "enhanced": true,
+      "patterns": ["gradient-text", "smooth-entrance"],
+      "status": "complete",
+      "changes": [
+        "Title uses gradient text (primary to accent)",
+        "Staggered entrance animations for title and subtitle",
+        "Improved visual hierarchy"
+      ]
+    },
+    "link-buttons": {
+      "enhanced": true,
+      "patterns": ["shimmer-effect", "hover-lift"],
+      "status": "complete",
+      "changes": [
+        "Added shimmer effect on hover",
+        "Enhanced border and shadow on hover",
+        "Scale-down on active state",
+        "Increased border width for definition"
+      ]
+    }
+  },
+  "tokens_added": {
+    "transitions": ["--transition-fast", "--transition-normal", "--transition-slow"],
+    "shadows": ["--shadow-md", "--shadow-xl"],
+    "colors": ["--primary-light", "--accent"]
+  },
+  "animations_added": ["slideInUp", "scaleIn"]
+}
