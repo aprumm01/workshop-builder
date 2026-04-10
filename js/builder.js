@@ -325,7 +325,9 @@ function handleActivityDrop(e) {
     console.log('Source:', draggedData);
     console.log('Target index:', targetIndex);
     console.log('Target phase:', targetPhase);
-    console.log('Mouse Y:', e.clientY, 'Target rect:', rect.top, '-', rect.bottom);
+    console.log('Target element:', this.querySelector('.activity-name')?.textContent);
+    console.log('Mouse Y:', e.clientY);
+    console.log('Target rect - top:', rect.top, 'bottom:', rect.bottom, 'height:', rect.height);
 
     // Use MOUSE position consistently
     const mouseY = e.clientY;
@@ -553,13 +555,14 @@ function reorderActivity(fromDayId, fromIndex, toDayId, toIndex, insertBefore, s
     console.log('From day:', fromDayId, 'index:', fromIndex);
     console.log('To day:', toDayId, 'index:', toIndex);
     console.log('insertBefore:', insertBefore);
-    console.log('Before removal, activities:', fromDay.activities.map((a, i) => `${i}: ${a.id}`));
+    console.log('Before removal, activities:', fromDay.activities.map((a, i) => `${i}: ${a.id} (phase: ${a.phase || 'none'})`));
 
     // Remove from source
     const activity = fromDay.activities.splice(fromIndex, 1)[0];
     activity.phaseWarning = showWarning;
 
-    console.log('After removal, activities:', fromDay.activities.map((a, i) => `${i}: ${a.id}`));
+    console.log('Removed activity:', activity.id);
+    console.log('After removal, activities:', fromDay.activities.map((a, i) => `${i}: ${a.id} (phase: ${a.phase || 'none'})`));
 
     // Calculate insertion index
     let insertAt;
@@ -575,7 +578,8 @@ function reorderActivity(fromDayId, fromIndex, toDayId, toIndex, insertBefore, s
     // Insert at calculated position
     toDay.activities.splice(insertAt, 0, activity);
 
-    console.log('After insert, activities:', toDay.activities.map((a, i) => `${i}: ${a.id}`));
+    console.log('After insert, activities:', toDay.activities.map((a, i) => `${i}: ${a.id} (phase: ${a.phase || 'none'})`));
+    console.log('Expected order based on visual:', insertBefore ? `Should be BEFORE index ${toIndex}` : `Should be AFTER index ${toIndex}`);
 
     WorkshopStorage.saveWorkshop(workshop);
     renderWorkshop();
