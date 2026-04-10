@@ -309,8 +309,27 @@ function handleActivityDrop(e) {
     const targetPhase = this.dataset.phase;
 
     const rect = this.getBoundingClientRect();
-    const midpoint = rect.top + rect.height / 2;
-    const insertBefore = e.clientY < midpoint;
+
+    // Use same logic as dragover: check center position
+    let insertBefore = false;
+    if (draggedElement) {
+        const draggedRect = draggedElement.getBoundingClientRect();
+        const draggedCenter = draggedRect.top + (draggedRect.height / 2);
+        const threshold = rect.height * 0.3;
+
+        if (draggedCenter < rect.top + threshold) {
+            insertBefore = true;
+        } else if (draggedCenter > rect.bottom - threshold) {
+            insertBefore = false;
+        } else {
+            const rectCenter = rect.top + (rect.height / 2);
+            insertBefore = draggedCenter < rectCenter;
+        }
+    } else {
+        // Fallback to mouse position
+        const midpoint = rect.top + rect.height / 2;
+        insertBefore = e.clientY < midpoint;
+    }
 
     // Check if phase matches
     const isValidPhase = targetPhase === draggedData.phase ||
