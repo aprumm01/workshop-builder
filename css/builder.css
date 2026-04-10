@@ -459,19 +459,22 @@ body {
     display: block;
     text-align: center;
     color: var(--text-light);
-    padding: 1.5rem;
+    padding: 2rem 1rem;
     font-size: 0.875rem;
     font-weight: 500;
+    border: 2px dashed var(--border);
+    border-radius: 0.5rem;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.5) 0%, rgba(240, 253, 250, 0.5) 100%);
 }
 
 .timeline-activities.drag-over {
     background: linear-gradient(135deg, #F0FDFA 0%, #CCFBF1 100%);
-    border-color: var(--primary);
-    border-style: solid;
-    border-width: 3px;
+    border: 3px solid var(--primary);
+    border-radius: 0.5rem;
     box-shadow: inset 0 0 0 4px rgba(13, 148, 136, 0.2), 0 8px 24px rgba(13, 148, 136, 0.3);
     transform: scale(1.02);
-    animation: pulse 1s ease-in-out infinite;
+    animation: magneticPulse 0.6s ease-in-out infinite;
+    min-height: 100px;
 }
 
 /* Drag phase badge */
@@ -540,33 +543,37 @@ body {
 .timeline-activities.drag-valid {
     background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
     border-color: var(--success);
-    box-shadow: inset 0 0 0 2px rgba(34, 197, 94, 0.1);
+    box-shadow: inset 0 0 0 4px rgba(34, 197, 94, 0.15), 0 8px 24px rgba(34, 197, 94, 0.3);
 }
 
 .timeline-activities.drag-valid::after {
-    content: "✓ Correct phase";
+    content: "✓ CORRECT PHASE";
     display: block;
     text-align: center;
     color: var(--success);
-    font-weight: 600;
+    font-weight: 800;
     font-size: 0.875rem;
-    margin-top: 0.5rem;
+    margin-top: 0.75rem;
+    letter-spacing: 0.05em;
+    text-shadow: 0 2px 4px rgba(34, 197, 94, 0.2);
 }
 
 .timeline-activities.drag-invalid {
     background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
     border-color: var(--danger);
-    box-shadow: inset 0 0 0 2px rgba(239, 68, 68, 0.1);
+    box-shadow: inset 0 0 0 4px rgba(239, 68, 68, 0.15), 0 8px 24px rgba(239, 68, 68, 0.3);
 }
 
 .timeline-activities.drag-invalid::after {
-    content: "⚠ Wrong phase";
+    content: "⚠ WRONG PHASE";
     display: block;
     text-align: center;
     color: var(--danger);
-    font-weight: 600;
+    font-weight: 800;
     font-size: 0.875rem;
-    margin-top: 0.5rem;
+    margin-top: 0.75rem;
+    letter-spacing: 0.05em;
+    text-shadow: 0 2px 4px rgba(239, 68, 68, 0.2);
 }
 
 .timeline-activity {
@@ -627,57 +634,70 @@ body {
     color: white;
 }
 
-/* Drop position indicators with animated spacing */
+/* Drop position indicators with MAGNETIC SNAPPING */
 .timeline-activity.drop-before {
-    margin-top: 5rem;
-    transition: margin-top var(--transition-spring);
+    margin-top: 6rem !important;
+    transition: margin-top 150ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .timeline-activity.drop-before::after {
-    content: '↓ Drop here';
+    content: '↓ DROP HERE';
     position: absolute;
-    top: -3.5rem;
-    left: 50%;
-    transform: translateX(-50%);
-    height: 6px;
-    width: calc(100% - 2rem);
+    top: -4rem;
+    left: 0;
+    right: 0;
+    height: 8px;
     background: linear-gradient(90deg, var(--primary), var(--primary-light));
-    border-radius: 3px;
-    box-shadow: 0 0 20px rgba(13, 148, 136, 0.6);
-    animation: slideIn 0.2s ease-out, pulse 1s ease-in-out infinite;
+    border-radius: 4px;
+    box-shadow: 0 0 24px rgba(13, 148, 136, 0.8), 0 0 48px rgba(13, 148, 136, 0.4);
+    animation: slideIn 0.15s ease-out, magneticPulse 0.6s ease-in-out infinite;
     color: var(--primary);
-    font-weight: 700;
-    font-size: 0.875rem;
+    font-weight: 800;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
     line-height: 1;
-    padding-top: 1rem;
+    padding-top: 1.25rem;
     text-align: center;
+    z-index: 100;
 }
 
 .timeline-activity.drop-after {
-    margin-bottom: 5rem;
-    transition: margin-bottom var(--transition-spring);
+    margin-bottom: 6rem !important;
+    transition: margin-bottom 150ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .timeline-activity.drop-after::after {
-    content: '↓ Drop here';
+    content: '↓ DROP HERE';
     position: absolute;
-    bottom: -3.5rem;
-    left: 50%;
-    transform: translateX(-50%);
-    height: 6px;
-    width: calc(100% - 2rem);
+    bottom: -4rem;
+    left: 0;
+    right: 0;
+    height: 8px;
     background: linear-gradient(90deg, var(--primary), var(--primary-light));
-    border-radius: 3px;
-    box-shadow: 0 0 20px rgba(13, 148, 136, 0.6);
-    animation: slideIn 0.2s ease-out, pulse 1s ease-in-out infinite;
+    border-radius: 4px;
+    box-shadow: 0 0 24px rgba(13, 148, 136, 0.8), 0 0 48px rgba(13, 148, 136, 0.4);
+    animation: slideIn 0.15s ease-out, magneticPulse 0.6s ease-in-out infinite;
     color: var(--primary);
-    font-weight: 700;
-    font-size: 0.875rem;
+    font-weight: 800;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
     line-height: 1;
-    padding-bottom: 1rem;
+    padding-bottom: 1.25rem;
     text-align: center;
     display: flex;
     flex-direction: column-reverse;
+    z-index: 100;
+}
+
+@keyframes magneticPulse {
+    0%, 100% {
+        transform: scaleY(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scaleY(1.2);
+        opacity: 0.85;
+    }
 }
 
 @keyframes slideIn {

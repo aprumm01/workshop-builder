@@ -270,17 +270,27 @@ function handleActivityDragOver(e) {
 
     const rect = this.getBoundingClientRect();
     const midpoint = rect.top + rect.height / 2;
+    const threshold = rect.height * 0.3; // 30% threshold for easier targeting
 
-    // Remove existing indicators
+    // Remove existing indicators from ALL activities
     document.querySelectorAll('.timeline-activity').forEach(el => {
         el.classList.remove('drop-before', 'drop-after');
     });
 
-    // Add indicator based on mouse position
-    if (e.clientY < midpoint) {
+    // Determine drop position with larger threshold
+    if (e.clientY < midpoint - threshold) {
+        // Drop before
         this.classList.add('drop-before');
-    } else {
+    } else if (e.clientY > midpoint + threshold) {
+        // Drop after
         this.classList.add('drop-after');
+    } else {
+        // In middle zone - snap to closer side
+        if (e.clientY < midpoint) {
+            this.classList.add('drop-before');
+        } else {
+            this.classList.add('drop-after');
+        }
     }
 }
 
