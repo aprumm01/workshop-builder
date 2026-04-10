@@ -21,7 +21,38 @@ document.addEventListener('DOMContentLoaded', async function() {
     initializeUI();
     renderWorkshop();
     setupEventListeners();
+    setupKeyboardShortcuts();
 });
+
+function setupKeyboardShortcuts() {
+    document.addEventListener('keydown', (e) => {
+        // Save: Ctrl/Cmd + S
+        if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+            e.preventDefault();
+            saveWorkshop();
+        }
+
+        // Export: Ctrl/Cmd + E
+        if ((e.ctrlKey || e.metaKey) && e.key === 'e') {
+            e.preventDefault();
+            exportWorkshop();
+        }
+
+        // Generate Report: Ctrl/Cmd + R
+        if ((e.ctrlKey || e.metaKey) && e.key === 'r') {
+            e.preventDefault();
+            generateReport();
+        }
+
+        // Close modal: Escape
+        if (e.key === 'Escape') {
+            const modal = document.getElementById('activityModal');
+            if (modal && modal.style.display !== 'none') {
+                closeModal();
+            }
+        }
+    });
+}
 
 async function loadExercises() {
     try {
@@ -56,8 +87,9 @@ function populateToolbox() {
         activityEl.dataset.exerciseId = exercise.id;
         activityEl.dataset.phase = exercise.phase;
 
+        const iconName = getIconName(exercise.icon);
         activityEl.innerHTML = `
-            <div class="toolbox-icon">${exercise.icon}</div>
+            <div class="toolbox-icon"><i data-lucide="${iconName}"></i></div>
             <div class="toolbox-info">
                 <div class="toolbox-name">${exercise.name}</div>
                 <div class="toolbox-phase">${exercise.phase}</div>
@@ -70,6 +102,11 @@ function populateToolbox() {
 
         container.appendChild(activityEl);
     });
+
+    // Initialize Lucide icons
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    }
 }
 
 function setupPhaseFilters() {
@@ -138,19 +175,19 @@ function renderWorkshop() {
             </div>
             <div class="phase-sections">
                 <div class="phase-section" data-phase="collect" data-day="${day.day}">
-                    <div class="phase-section-header">📥 Collect</div>
+                    <div class="phase-section-header"><i data-lucide="inbox" style="width: 16px; height: 16px; display: inline; margin-right: 0.5rem;"></i>Collect</div>
                     <div class="timeline-activities" data-day="${day.day}" data-phase="collect"></div>
                 </div>
                 <div class="phase-section" data-phase="choose" data-day="${day.day}">
-                    <div class="phase-section-header">🎯 Choose</div>
+                    <div class="phase-section-header"><i data-lucide="target" style="width: 16px; height: 16px; display: inline; margin-right: 0.5rem;"></i>Choose</div>
                     <div class="timeline-activities" data-day="${day.day}" data-phase="choose"></div>
                 </div>
                 <div class="phase-section" data-phase="create" data-day="${day.day}">
-                    <div class="phase-section-header">✨ Create</div>
+                    <div class="phase-section-header"><i data-lucide="sparkles" style="width: 16px; height: 16px; display: inline; margin-right: 0.5rem;"></i>Create</div>
                     <div class="timeline-activities" data-day="${day.day}" data-phase="create"></div>
                 </div>
                 <div class="phase-section" data-phase="commit" data-day="${day.day}">
-                    <div class="phase-section-header">✅ Commit</div>
+                    <div class="phase-section-header"><i data-lucide="check-circle" style="width: 16px; height: 16px; display: inline; margin-right: 0.5rem;"></i>Commit</div>
                     <div class="timeline-activities" data-day="${day.day}" data-phase="commit"></div>
                 </div>
             </div>
@@ -184,9 +221,10 @@ function renderActivities(container, activities, dayId, phase) {
         activityEl.dataset.phase = exercise.phase;
         activityEl.dataset.activityId = activity.id;
 
+        const iconName = getIconName(exercise.icon);
         activityEl.innerHTML = `
             <div class="activity-handle">⋮⋮</div>
-            <div class="activity-icon">${exercise.icon}</div>
+            <div class="activity-icon"><i data-lucide="${iconName}"></i></div>
             <div class="activity-content">
                 <div class="activity-name">${exercise.name}</div>
                 <div class="activity-meta">
@@ -197,9 +235,9 @@ function renderActivities(container, activities, dayId, phase) {
                 </div>
             </div>
             <div class="activity-actions">
-                <button class="action-btn" onclick="showActivityDetails('${exercise.id}')" title="View details">ℹ️</button>
-                <button class="action-btn" onclick="editActivityDuration(${dayId}, ${activity.originalIndex})" title="Edit duration">⏱️</button>
-                <button class="action-btn" onclick="deleteActivity(${dayId}, ${activity.originalIndex})" title="Delete">🗑️</button>
+                <button class="action-btn" onclick="showActivityDetails('${exercise.id}')" title="View details" aria-label="View ${exercise.name} details"><i data-lucide="info"></i></button>
+                <button class="action-btn" onclick="editActivityDuration(${dayId}, ${activity.originalIndex})" title="Edit duration" aria-label="Edit duration"><i data-lucide="clock"></i></button>
+                <button class="action-btn" onclick="deleteActivity(${dayId}, ${activity.originalIndex})" title="Delete" aria-label="Delete ${exercise.name}"><i data-lucide="trash-2"></i></button>
             </div>
         `;
 
@@ -211,6 +249,11 @@ function renderActivities(container, activities, dayId, phase) {
 
         container.appendChild(activityEl);
     });
+
+    // Initialize Lucide icons
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    }
 
     // Setup drop zones for empty spaces
     setupDropZone(container);

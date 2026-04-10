@@ -32,6 +32,35 @@
     --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
 }
 
+/* Focus states for keyboard navigation */
+button:focus-visible,
+.action-btn:focus-visible,
+.filter-btn:focus-visible,
+.back-link:focus-visible,
+.checklist-item:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 2px;
+    border-radius: 0.375rem;
+}
+
+.toolbox-activity:focus-visible,
+.timeline-activity:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
 body {
     margin: 0;
     overflow: hidden;
@@ -752,6 +781,14 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 0.375rem;
+}
+
+.btn-primary,
+.btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .action-btn:hover {
