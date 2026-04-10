@@ -203,14 +203,75 @@ function renderActivities(container, activities, dayId, phase) {
             </div>
         `;
 
+        // Add drag event listeners for reordering
         activityEl.addEventListener('dragstart', handleTimelineDragStart);
         activityEl.addEventListener('dragend', handleDragEnd);
+        activityEl.addEventListener('dragover', handleActivityDragOver);
+        activityEl.addEventListener('drop', handleActivityDrop);
 
         container.appendChild(activityEl);
     });
 
-    // Setup drop zones
+    // Setup drop zones for empty spaces
     setupDropZone(container);
+}
+
+function handleActivityDragOver(e) {
+    if (!draggedData || draggedData.source === 'toolbox') return;
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    // Don't show indicator on self
+    if (draggedElement === this) return;
+
+    const rect = this.getBoundingClientRect();
+    const midpoint = rect.top + rect.height / 2;
+
+    // Remove existing indicators
+    document.querySelectorAll('.timeline-activity').forEach(el => {
+        el.classList.remove('drop-before', 'drop-after');
+    });
+
+    // Add indicator based on mouse position
+    if (e.clientY < midpoint) {
+        this.classList.add('drop-before');
+    } else {
+        this.classList.add('drop-after');
+    }
+}
+
+function handleActivityDrop(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (!draggedData) return;
+
+    // Remove drop indicators
+    document.querySelectorAll('.timeline-activity').forEach(el => {
+        el.classList.remove('drop-before', 'drop-after');
+    });
+
+    const targetDayId = parseInt(this.dataset.dayId);
+    const targetIndex = parseInt(this.dataset.activityIndex);
+    const targetPhase = this.dataset.phase;
+
+    const rect = this.getBoundingClientRect();
+    const midpoint = rect.top + rect.height / 2;
+    const insertBefore = e.clientY < midpoint;
+
+    // Check if phase matches
+    const isValidPhase = targetPhase === draggedData.phase ||
+                        (draggedData.additionalPhases && draggedData.additionalPhases.includes(targetPhase));
+
+    if (draggedData.source === 'toolbox') {
+        addActivityToDay(targetDayId, draggedData.exerciseId, targetPhase, !isValidPhase, targetIndex, insertBefore);
+    } else if (draggedData.source === 'timeline') {
+        reorderActivity(draggedData.dayId, draggedData.activityIndex, targetDayId, targetIndex, insertBefore, !isValidPhase);
+    }
+
+    draggedData = null;
+    draggedElement = null;
 }
 
 function setupDropZone(container) {
@@ -348,7 +409,7 @@ function handleDrop(e) {
     draggedElement = null;
 }
 
-function addActivityToDay(dayId, exerciseId, targetPhase, showWarning) {
+function addActivityToDay(dayId, exerciseId, targetPhase, showWarning, targetIndex, insertBefore) {
     const exercise = exercises.find(e => e.id === exerciseId);
     if (!exercise) return;
 
@@ -364,7 +425,40 @@ function addActivityToDay(dayId, exerciseId, targetPhase, showWarning) {
         phaseWarning: showWarning
     };
 
-    day.activities.push(newActivity);
+    // If targetIndex is provided, insert at that position
+    if (typeof targetIndex === 'number') {
+        const insertAt = insertBefore ? targetIndex : targetIndex + 1;
+        day.activities.splice(insertAt, 0, newActivity);
+    } else {
+        // Otherwise add to end
+        day.activities.push(newActivity);
+    }
+
+    WorkshopStorage.saveWorkshop(workshop);
+    renderWorkshop();
+}
+
+function reorderActivity(fromDayId, fromIndex, toDayId, toIndex, insertBefore, showWarning) {
+    const fromDay = workshop.days.find(d => d.day === fromDayId);
+    const toDay = workshop.days.find(d => d.day === toDayId);
+
+    if (!fromDay || !toDay) return;
+
+    // Remove from source
+    const activity = fromDay.activities.splice(fromIndex, 1)[0];
+    activity.phaseWarning = showWarning;
+
+    // Calculate insertion index
+    let insertAt;
+    if (fromDayId === toDayId && fromIndex < toIndex) {
+        // Same day, moving down - adjust for removed item
+        insertAt = insertBefore ? toIndex - 1 : toIndex;
+    } else {
+        insertAt = insertBefore ? toIndex : toIndex + 1;
+    }
+
+    // Insert at calculated position
+    toDay.activities.splice(insertAt, 0, activity);
 
     WorkshopStorage.saveWorkshop(workshop);
     renderWorkshop();
@@ -380,7 +474,7 @@ function moveActivity(fromDayId, fromIndex, toDayId, targetPhase, showWarning) {
     const activity = fromDay.activities.splice(fromIndex, 1)[0];
     activity.phaseWarning = showWarning;
 
-    // Add to destination
+    // Add to destination (end of array)
     toDay.activities.push(activity);
 
     WorkshopStorage.saveWorkshop(workshop);

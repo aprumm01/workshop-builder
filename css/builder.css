@@ -557,6 +557,17 @@ body {
     box-shadow: 0 2px 8px rgba(13, 148, 136, 0.2);
 }
 
+/* Drop position indicators */
+.timeline-activity.drop-before {
+    border-top: 3px solid var(--primary);
+    margin-top: 3px;
+}
+
+.timeline-activity.drop-after {
+    border-bottom: 3px solid var(--primary);
+    margin-bottom: 3px;
+}
+
 .activity-handle {
     font-size: 1.25rem;
     color: var(--text-medium);
