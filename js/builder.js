@@ -268,7 +268,6 @@ function handleActivityDragOver(e) {
     if (draggedElement === this) return;
 
     const rect = this.getBoundingClientRect();
-    const midpoint = rect.top + rect.height / 2;
     const threshold = rect.height * 0.3; // 30% threshold for easier targeting
 
     // Remove existing indicators from ALL activities
@@ -276,20 +275,33 @@ function handleActivityDragOver(e) {
         el.classList.remove('drop-before', 'drop-after');
     });
 
-    // Determine drop position with larger threshold
-    if (e.clientY < midpoint - threshold) {
-        // Drop before
-        this.classList.add('drop-before');
-    } else if (e.clientY > midpoint + threshold) {
-        // Drop after
-        this.classList.add('drop-after');
-    } else {
-        // In middle zone - snap to closer side
-        if (e.clientY < midpoint) {
-            this.classList.add('drop-before');
+    // Calculate based on dragged element's CENTER position
+    let shouldShowBefore = false;
+    if (draggedElement) {
+        const draggedRect = draggedElement.getBoundingClientRect();
+        const draggedCenter = draggedRect.top + (draggedRect.height / 2);
+
+        // Check if dragged center is in the top portion of target
+        if (draggedCenter < rect.top + threshold) {
+            shouldShowBefore = true;
+        } else if (draggedCenter > rect.bottom - threshold) {
+            shouldShowBefore = false;
         } else {
-            this.classList.add('drop-after');
+            // In middle zone - use midpoint
+            const rectCenter = rect.top + (rect.height / 2);
+            shouldShowBefore = draggedCenter < rectCenter;
         }
+    } else {
+        // Fallback: use mouse position
+        const midpoint = rect.top + rect.height / 2;
+        shouldShowBefore = e.clientY < midpoint;
+    }
+
+    // Add the appropriate indicator
+    if (shouldShowBefore) {
+        this.classList.add('drop-before');
+    } else {
+        this.classList.add('drop-after');
     }
 }
 
@@ -337,6 +349,9 @@ function handleActivityDrop(e) {
     }
 
     console.log('insertBefore:', insertBefore);
+
+    // CRITICAL: When items are displayed grouped by phase but stored in a flat array,
+    // we need to ensure visual indicators match actual drop behavior
 
     // Check if phase matches
     const isValidPhase = targetPhase === draggedData.phase ||
