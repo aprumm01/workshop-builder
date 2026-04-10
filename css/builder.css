@@ -623,18 +623,17 @@ body {
 
 .timeline-activity:active {
     cursor: grabbing;
-    transform: scale(0.98);
-    box-shadow: 0 2px 8px rgba(13, 148, 136, 0.2);
 }
 
 .timeline-activity.dragging {
-    opacity: 0.5;
-    transform: scale(1.02);
+    opacity: 0.6;
+    transform: scale(1.05) rotate(-2deg);
     background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
     color: white;
-    box-shadow: 0 12px 40px rgba(13, 148, 136, 0.5);
+    box-shadow: 0 16px 48px rgba(13, 148, 136, 0.6);
     border-color: var(--primary);
     z-index: 100;
+    cursor: grabbing;
 }
 
 .timeline-activity.dragging .activity-name,
