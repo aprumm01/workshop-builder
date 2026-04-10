@@ -109,25 +109,24 @@ function renderWorkshop() {
         const hours = Math.floor(totalMinutes / 60);
         const mins = totalMinutes % 60;
 
-        // Group activities by phase
+        // Group activities by phase with their original indices
         const groupedActivities = {
-            collect: day.activities.filter(a => {
-                const ex = exercises.find(e => e.id === a.id);
-                return ex && ex.phase === 'collect';
-            }),
-            choose: day.activities.filter(a => {
-                const ex = exercises.find(e => e.id === a.id);
-                return ex && ex.phase === 'choose';
-            }),
-            create: day.activities.filter(a => {
-                const ex = exercises.find(e => e.id === a.id);
-                return ex && ex.phase === 'create';
-            }),
-            commit: day.activities.filter(a => {
-                const ex = exercises.find(e => e.id === a.id);
-                return ex && ex.phase === 'commit';
-            })
+            collect: [],
+            choose: [],
+            create: [],
+            commit: []
         };
+
+        day.activities.forEach((activity, index) => {
+            const ex = exercises.find(e => e.id === activity.id);
+            if (ex) {
+                const phaseData = {
+                    ...activity,
+                    originalIndex: index
+                };
+                groupedActivities[ex.phase].push(phaseData);
+            }
+        });
 
         dayEl.innerHTML = `
             <div class="day-header">
@@ -170,7 +169,7 @@ function renderWorkshop() {
 }
 
 function renderActivities(container, activities, dayId, phase) {
-    activities.forEach((activity, index) => {
+    activities.forEach((activity) => {
         const exercise = exercises.find(e => e.id === activity.id);
         if (!exercise) return;
 
@@ -180,9 +179,10 @@ function renderActivities(container, activities, dayId, phase) {
             activityEl.classList.add('phase-mismatch');
         }
         activityEl.draggable = true;
-        activityEl.dataset.activityIndex = index;
+        activityEl.dataset.activityIndex = activity.originalIndex;
         activityEl.dataset.dayId = dayId;
         activityEl.dataset.phase = exercise.phase;
+        activityEl.dataset.activityId = activity.id;
 
         activityEl.innerHTML = `
             <div class="activity-handle">⋮⋮</div>
@@ -198,8 +198,8 @@ function renderActivities(container, activities, dayId, phase) {
             </div>
             <div class="activity-actions">
                 <button class="action-btn" onclick="showActivityDetails('${exercise.id}')" title="View details">ℹ️</button>
-                <button class="action-btn" onclick="editActivityDuration(${dayId}, ${index})" title="Edit duration">⏱️</button>
-                <button class="action-btn" onclick="deleteActivity(${dayId}, ${index})" title="Delete">🗑️</button>
+                <button class="action-btn" onclick="editActivityDuration(${dayId}, ${activity.originalIndex})" title="Edit duration">⏱️</button>
+                <button class="action-btn" onclick="deleteActivity(${dayId}, ${activity.originalIndex})" title="Delete">🗑️</button>
             </div>
         `;
 
@@ -237,12 +237,16 @@ function handleToolboxDragStart(e) {
     badge.id = 'drag-phase-badge';
     badge.className = 'drag-phase-badge';
     badge.textContent = exercise ? exercise.phase.toUpperCase() : '';
+    badge.style.position = 'fixed';
+    badge.style.pointerEvents = 'none';
+    badge.style.left = (e.clientX + 15) + 'px';
+    badge.style.top = (e.clientY + 15) + 'px';
     document.body.appendChild(badge);
 }
 
 function handleTimelineDragStart(e) {
     draggedElement = this;
-    const activityId = this.querySelector('.activity-content')?.dataset?.activityId;
+    const activityId = this.dataset.activityId;
     const exercise = activityId ? exercises.find(ex => ex.id === activityId) : null;
 
     draggedData = {
@@ -260,6 +264,10 @@ function handleTimelineDragStart(e) {
     badge.id = 'drag-phase-badge';
     badge.className = 'drag-phase-badge';
     badge.textContent = this.dataset.phase ? this.dataset.phase.toUpperCase() : '';
+    badge.style.position = 'fixed';
+    badge.style.pointerEvents = 'none';
+    badge.style.left = (e.clientX + 15) + 'px';
+    badge.style.top = (e.clientY + 15) + 'px';
     document.body.appendChild(badge);
 }
 
@@ -332,7 +340,7 @@ function handleDrop(e) {
         // Add new activity from toolbox
         addActivityToDay(targetDayId, draggedData.exerciseId, targetPhase, !isValidPhase);
     } else if (draggedData.source === 'timeline') {
-        // Move activity within or between days
+        // Move activity within or between days/phases
         moveActivity(draggedData.dayId, draggedData.activityIndex, targetDayId, targetPhase, !isValidPhase);
     }
 
@@ -368,8 +376,11 @@ function moveActivity(fromDayId, fromIndex, toDayId, targetPhase, showWarning) {
 
     if (!fromDay || !toDay) return;
 
+    // Remove from source
     const activity = fromDay.activities.splice(fromIndex, 1)[0];
     activity.phaseWarning = showWarning;
+
+    // Add to destination
     toDay.activities.push(activity);
 
     WorkshopStorage.saveWorkshop(workshop);
@@ -377,8 +388,6 @@ function moveActivity(fromDayId, fromIndex, toDayId, targetPhase, showWarning) {
 }
 
 function deleteActivity(dayId, activityIndex) {
-    if (!confirm('Remove this activity from the workshop?')) return;
-
     const day = workshop.days.find(d => d.day === dayId);
     if (!day) return;
 
