@@ -176,6 +176,9 @@ function renderActivities(container, activities, dayId, phase) {
 
         const activityEl = document.createElement('div');
         activityEl.className = 'timeline-activity';
+        if (activity.phaseWarning) {
+            activityEl.classList.add('phase-mismatch');
+        }
         activityEl.draggable = true;
         activityEl.dataset.activityIndex = index;
         activityEl.dataset.dayId = dayId;
@@ -190,6 +193,7 @@ function renderActivities(container, activities, dayId, phase) {
                     <span>${exercise.phase.toUpperCase()}</span>
                     <span>${activity.duration} minutes</span>
                     ${activity.required ? '<span style="color: var(--success);">● Required</span>' : ''}
+                    ${activity.phaseWarning ? '<span class="phase-warning-badge" title="This activity is typically used in the ' + exercise.phase + ' phase">⚠️ Check phase</span>' : ''}
                 </div>
             </div>
             <div class="activity-actions">
@@ -220,25 +224,43 @@ function handleToolboxDragStart(e) {
     draggedData = {
         source: 'toolbox',
         exerciseId: this.dataset.exerciseId,
-        phase: exercise ? exercise.phase : null
+        phase: exercise ? exercise.phase : null,
+        additionalPhases: exercise && exercise.additionalPhases ? exercise.additionalPhases : []
     };
     e.dataTransfer.effectAllowed = 'copy';
 
     // Add visual indicator to dragged element
     this.classList.add('dragging');
+
+    // Create a floating phase badge
+    const badge = document.createElement('div');
+    badge.id = 'drag-phase-badge';
+    badge.className = 'drag-phase-badge';
+    badge.textContent = exercise ? exercise.phase.toUpperCase() : '';
+    document.body.appendChild(badge);
 }
 
 function handleTimelineDragStart(e) {
     draggedElement = this;
-    const exercise = exercises.find(ex => ex.id === this.dataset.exerciseId);
+    const activityId = this.querySelector('.activity-content')?.dataset?.activityId;
+    const exercise = activityId ? exercises.find(ex => ex.id === activityId) : null;
+
     draggedData = {
         source: 'timeline',
         dayId: parseInt(this.dataset.dayId),
         activityIndex: parseInt(this.dataset.activityIndex),
-        phase: this.dataset.phase
+        phase: this.dataset.phase,
+        additionalPhases: exercise && exercise.additionalPhases ? exercise.additionalPhases : []
     };
     e.dataTransfer.effectAllowed = 'move';
     this.style.opacity = '0.5';
+
+    // Create a floating phase badge
+    const badge = document.createElement('div');
+    badge.id = 'drag-phase-badge';
+    badge.className = 'drag-phase-badge';
+    badge.textContent = this.dataset.phase ? this.dataset.phase.toUpperCase() : '';
+    document.body.appendChild(badge);
 }
 
 function handleDragEnd(e) {
@@ -253,58 +275,72 @@ function handleDragEnd(e) {
 
     // Remove all validation states
     document.querySelectorAll('.timeline-activities').forEach(el => {
-        el.classList.remove('drag-over', 'drag-valid', 'drag-invalid');
+        el.classList.remove('drag-over');
     });
+
+    // Remove badge
+    const badge = document.getElementById('drag-phase-badge');
+    if (badge) badge.remove();
 }
+
+// Update badge position during drag
+document.addEventListener('dragover', function(e) {
+    const badge = document.getElementById('drag-phase-badge');
+    if (badge && draggedData) {
+        badge.style.left = (e.clientX + 15) + 'px';
+        badge.style.top = (e.clientY + 15) + 'px';
+
+        // Update badge color based on drop zone
+        const dropZone = e.target.closest('.timeline-activities');
+        if (dropZone) {
+            const dropPhase = dropZone.dataset.phase;
+            const isValid = dropPhase === draggedData.phase ||
+                          (draggedData.additionalPhases && draggedData.additionalPhases.includes(dropPhase));
+
+            badge.className = 'drag-phase-badge ' + (isValid ? 'valid' : 'invalid');
+        } else {
+            badge.className = 'drag-phase-badge';
+        }
+    }
+});
 
 function handleDragOver(e) {
     e.preventDefault();
     e.dataTransfer.dropEffect = draggedData.source === 'toolbox' ? 'copy' : 'move';
-
-    const dropZonePhase = this.dataset.phase;
-    const draggedPhase = draggedData.phase;
-
-    // Add appropriate class based on phase match
     this.classList.add('drag-over');
-
-    if (dropZonePhase && draggedPhase) {
-        if (dropZonePhase === draggedPhase) {
-            this.classList.add('drag-valid');
-            this.classList.remove('drag-invalid');
-        } else {
-            this.classList.add('drag-invalid');
-            this.classList.remove('drag-valid');
-        }
-    }
 }
 
 function handleDragLeave(e) {
     // Only remove classes if we're actually leaving the drop zone
     if (e.target === this) {
-        this.classList.remove('drag-over', 'drag-valid', 'drag-invalid');
+        this.classList.remove('drag-over');
     }
 }
 
 function handleDrop(e) {
     e.preventDefault();
-    this.classList.remove('drag-over', 'drag-valid', 'drag-invalid');
+    this.classList.remove('drag-over');
 
     const targetDayId = parseInt(this.dataset.day);
     const targetPhase = this.dataset.phase;
 
+    // Check if phase matches
+    const isValidPhase = targetPhase === draggedData.phase ||
+                        (draggedData.additionalPhases && draggedData.additionalPhases.includes(targetPhase));
+
     if (draggedData.source === 'toolbox') {
         // Add new activity from toolbox
-        addActivityToDay(targetDayId, draggedData.exerciseId);
+        addActivityToDay(targetDayId, draggedData.exerciseId, targetPhase, !isValidPhase);
     } else if (draggedData.source === 'timeline') {
         // Move activity within or between days
-        moveActivity(draggedData.dayId, draggedData.activityIndex, targetDayId);
+        moveActivity(draggedData.dayId, draggedData.activityIndex, targetDayId, targetPhase, !isValidPhase);
     }
 
     draggedData = null;
     draggedElement = null;
 }
 
-function addActivityToDay(dayId, exerciseId) {
+function addActivityToDay(dayId, exerciseId, targetPhase, showWarning) {
     const exercise = exercises.find(e => e.id === exerciseId);
     if (!exercise) return;
 
@@ -316,7 +352,8 @@ function addActivityToDay(dayId, exerciseId) {
         duration: exercise.duration.default,
         required: false,
         customized: false,
-        order: day.activities.length + 1
+        order: day.activities.length + 1,
+        phaseWarning: showWarning
     };
 
     day.activities.push(newActivity);
@@ -325,13 +362,14 @@ function addActivityToDay(dayId, exerciseId) {
     renderWorkshop();
 }
 
-function moveActivity(fromDayId, fromIndex, toDayId) {
+function moveActivity(fromDayId, fromIndex, toDayId, targetPhase, showWarning) {
     const fromDay = workshop.days.find(d => d.day === fromDayId);
     const toDay = workshop.days.find(d => d.day === toDayId);
 
     if (!fromDay || !toDay) return;
 
     const activity = fromDay.activities.splice(fromIndex, 1)[0];
+    activity.phaseWarning = showWarning;
     toDay.activities.push(activity);
 
     WorkshopStorage.saveWorkshop(workshop);

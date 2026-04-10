@@ -238,7 +238,8 @@
       "id": "long-term-goal",
       "name": "Long Term Goal & Key Questions",
       "icon": "🎯",
-      "phase": "choose",
+      "phase": "collect",
+      "additionalPhases": ["choose"],
       "duration": {
         "min": 30,
         "max": 45,
