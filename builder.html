@@ -9,7 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/builder.css">
-    <script src="js/lucide.min.js"></script>
 </head>
 <body>
     <div class="builder-container">
@@ -97,12 +96,17 @@
 
     <script src="js/storage.js"></script>
     <script src="js/icon-map.js"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
     <script src="js/builder.js"></script>
     <script>
         // Initialize Lucide icons after page load
         document.addEventListener('DOMContentLoaded', () => {
+            console.log('DOMContentLoaded - lucide available?', typeof lucide !== 'undefined');
             if (typeof lucide !== 'undefined') {
                 lucide.createIcons();
+                console.log('Lucide icons initialized');
+            } else {
+                console.error('Lucide not loaded!');
             }
         });
     </script>
