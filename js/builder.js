@@ -103,7 +103,7 @@ function populateToolbox() {
         container.appendChild(activityEl);
     });
 
-    // Initialize Lucide icons
+    // Initialize Lucide icons after adding all elements
     if (typeof lucide !== 'undefined') {
         lucide.createIcons();
     }
@@ -230,7 +230,6 @@ function renderActivities(container, activities, dayId, phase) {
                 <div class="activity-meta">
                     <span>${exercise.phase.toUpperCase()}</span>
                     <span>${activity.duration} minutes</span>
-                    ${activity.required ? '<span style="color: var(--success);">● Required</span>' : ''}
                     ${activity.phaseWarning ? '<span class="phase-warning-badge" title="This activity is typically used in the ' + exercise.phase + ' phase">⚠️ Check phase</span>' : ''}
                 </div>
             </div>
@@ -250,7 +249,7 @@ function renderActivities(container, activities, dayId, phase) {
         container.appendChild(activityEl);
     });
 
-    // Initialize Lucide icons
+    // Initialize Lucide icons after adding all timeline activities
     if (typeof lucide !== 'undefined') {
         lucide.createIcons();
     }
