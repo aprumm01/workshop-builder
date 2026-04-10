@@ -268,33 +268,34 @@ function handleActivityDragOver(e) {
     if (draggedElement === this) return;
 
     const rect = this.getBoundingClientRect();
-    const threshold = rect.height * 0.3; // 30% threshold for easier targeting
 
     // Remove existing indicators from ALL activities
     document.querySelectorAll('.timeline-activity').forEach(el => {
         el.classList.remove('drop-before', 'drop-after');
     });
 
-    // Calculate based on dragged element's CENTER position
-    let shouldShowBefore = false;
-    if (draggedElement) {
-        const draggedRect = draggedElement.getBoundingClientRect();
-        const draggedCenter = draggedRect.top + (draggedRect.height / 2);
+    // Use MOUSE position for the drop decision, not dragged element position
+    // This is more intuitive - where the cursor is determines where it drops
+    const mouseY = e.clientY;
+    const rectTop = rect.top;
+    const rectBottom = rect.bottom;
+    const rectHeight = rect.height;
+    const threshold = rectHeight * 0.4; // 40% zones top/bottom
 
-        // Check if dragged center is in the top portion of target
-        if (draggedCenter < rect.top + threshold) {
-            shouldShowBefore = true;
-        } else if (draggedCenter > rect.bottom - threshold) {
-            shouldShowBefore = false;
-        } else {
-            // In middle zone - use midpoint
-            const rectCenter = rect.top + (rect.height / 2);
-            shouldShowBefore = draggedCenter < rectCenter;
-        }
-    } else {
-        // Fallback: use mouse position
-        const midpoint = rect.top + rect.height / 2;
-        shouldShowBefore = e.clientY < midpoint;
+    let shouldShowBefore = false;
+
+    // Top 40% = drop before
+    if (mouseY < rectTop + threshold) {
+        shouldShowBefore = true;
+    }
+    // Bottom 40% = drop after
+    else if (mouseY > rectBottom - threshold) {
+        shouldShowBefore = false;
+    }
+    // Middle 20% = use midpoint
+    else {
+        const rectMidpoint = rectTop + (rectHeight / 2);
+        shouldShowBefore = mouseY < rectMidpoint;
     }
 
     // Add the appropriate indicator
@@ -324,28 +325,29 @@ function handleActivityDrop(e) {
     console.log('Source:', draggedData);
     console.log('Target index:', targetIndex);
     console.log('Target phase:', targetPhase);
+    console.log('Mouse Y:', e.clientY, 'Target rect:', rect.top, '-', rect.bottom);
 
-    const rect = this.getBoundingClientRect();
+    // Use MOUSE position consistently
+    const mouseY = e.clientY;
+    const rectTop = rect.top;
+    const rectBottom = rect.bottom;
+    const rectHeight = rect.height;
+    const threshold = rectHeight * 0.4; // 40% zones top/bottom
 
-    // Use same logic as dragover: check center position
     let insertBefore = false;
-    if (draggedElement) {
-        const draggedRect = draggedElement.getBoundingClientRect();
-        const draggedCenter = draggedRect.top + (draggedRect.height / 2);
-        const threshold = rect.height * 0.3;
 
-        if (draggedCenter < rect.top + threshold) {
-            insertBefore = true;
-        } else if (draggedCenter > rect.bottom - threshold) {
-            insertBefore = false;
-        } else {
-            const rectCenter = rect.top + (rect.height / 2);
-            insertBefore = draggedCenter < rectCenter;
-        }
-    } else {
-        // Fallback to mouse position
-        const midpoint = rect.top + rect.height / 2;
-        insertBefore = e.clientY < midpoint;
+    // Top 40% = drop before
+    if (mouseY < rectTop + threshold) {
+        insertBefore = true;
+    }
+    // Bottom 40% = drop after
+    else if (mouseY > rectBottom - threshold) {
+        insertBefore = false;
+    }
+    // Middle 20% = use midpoint
+    else {
+        const rectMidpoint = rectTop + (rectHeight / 2);
+        insertBefore = mouseY < rectMidpoint;
     }
 
     console.log('insertBefore:', insertBefore);
