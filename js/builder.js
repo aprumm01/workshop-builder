@@ -308,6 +308,11 @@ function handleActivityDrop(e) {
     const targetIndex = parseInt(this.dataset.activityIndex);
     const targetPhase = this.dataset.phase;
 
+    console.log('=== DROP DEBUG ===');
+    console.log('Source:', draggedData);
+    console.log('Target index:', targetIndex);
+    console.log('Target phase:', targetPhase);
+
     const rect = this.getBoundingClientRect();
 
     // Use same logic as dragover: check center position
@@ -330,6 +335,8 @@ function handleActivityDrop(e) {
         const midpoint = rect.top + rect.height / 2;
         insertBefore = e.clientY < midpoint;
     }
+
+    console.log('insertBefore:', insertBefore);
 
     // Check if phase matches
     const isValidPhase = targetPhase === draggedData.phase ||
@@ -525,9 +532,17 @@ function reorderActivity(fromDayId, fromIndex, toDayId, toIndex, insertBefore, s
 
     if (!fromDay || !toDay) return;
 
+    console.log('=== REORDER DEBUG ===');
+    console.log('From day:', fromDayId, 'index:', fromIndex);
+    console.log('To day:', toDayId, 'index:', toIndex);
+    console.log('insertBefore:', insertBefore);
+    console.log('Before removal, activities:', fromDay.activities.map((a, i) => `${i}: ${a.id}`));
+
     // Remove from source
     const activity = fromDay.activities.splice(fromIndex, 1)[0];
     activity.phaseWarning = showWarning;
+
+    console.log('After removal, activities:', fromDay.activities.map((a, i) => `${i}: ${a.id}`));
 
     // Calculate insertion index
     let insertAt;
@@ -538,8 +553,12 @@ function reorderActivity(fromDayId, fromIndex, toDayId, toIndex, insertBefore, s
         insertAt = insertBefore ? toIndex : toIndex + 1;
     }
 
+    console.log('Calculated insertAt:', insertAt);
+
     // Insert at calculated position
     toDay.activities.splice(insertAt, 0, activity);
+
+    console.log('After insert, activities:', toDay.activities.map((a, i) => `${i}: ${a.id}`));
 
     WorkshopStorage.saveWorkshop(workshop);
     renderWorkshop();
