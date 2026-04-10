@@ -327,6 +327,8 @@ function handleActivityDrop(e) {
     console.log('Target phase:', targetPhase);
     console.log('Target element:', this.querySelector('.activity-name')?.textContent);
     console.log('Mouse Y:', e.clientY);
+
+    const rect = this.getBoundingClientRect();
     console.log('Target rect - top:', rect.top, 'bottom:', rect.bottom, 'height:', rect.height);
 
     // Use MOUSE position consistently
