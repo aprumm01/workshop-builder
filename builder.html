@@ -27,39 +27,21 @@
             <div class="toolbox-activities" id="toolboxActivities">
                 <!-- Activities loaded by JS -->
             </div>
-
-            <div class="sidebar-footer">
-                <h4>4C's Checklist</h4>
-                <div class="checklist" id="fourCsChecklist">
-                    <label class="checklist-item">
-                        <input type="checkbox" id="check-collect" disabled>
-                        <span>📥 Collect</span>
-                    </label>
-                    <label class="checklist-item">
-                        <input type="checkbox" id="check-choose" disabled>
-                        <span>🎯 Choose</span>
-                    </label>
-                    <label class="checklist-item">
-                        <input type="checkbox" id="check-create" disabled>
-                        <span>✨ Create</span>
-                    </label>
-                    <label class="checklist-item">
-                        <input type="checkbox" id="check-commit" disabled>
-                        <span>✅ Commit</span>
-                    </label>
-                </div>
-            </div>
         </aside>
 
         <!-- Main Content: Workshop Builder -->
         <main class="builder-main">
             <header class="builder-header">
                 <div class="header-left">
-                    <h1 id="workshopTitle">Workshop Builder</h1>
-                    <p class="client-info" id="clientInfo"></p>
+                    <a href="index.html" class="back-link" title="Back to homepage">← Home</a>
+                    <div class="header-title">
+                        <h1 id="workshopTitle">Workshop Builder</h1>
+                        <p class="client-info" id="clientInfo"></p>
+                    </div>
                 </div>
                 <div class="header-right">
-                    <button class="btn-secondary" onclick="exportWorkshop()">💾 Export</button>
+                    <button class="btn-secondary" onclick="saveWorkshop()">💾 Save</button>
+                    <button class="btn-secondary" onclick="exportWorkshop()">📥 Export</button>
                     <button class="btn-primary" onclick="generateReport()">📄 Generate Report</button>
                 </div>
             </header>
@@ -68,6 +50,32 @@
                 <!-- Days loaded by JS -->
             </div>
         </main>
+
+        <!-- Right Sidebar: 4C's Checklist -->
+        <aside class="checklist-sidebar">
+            <div class="checklist-header">
+                <h4>4C's Checklist</h4>
+                <p>Ensure your workshop covers all phases</p>
+            </div>
+            <div class="checklist" id="fourCsChecklist">
+                <label class="checklist-item">
+                    <input type="checkbox" id="check-collect" disabled>
+                    <span>📥 Collect</span>
+                </label>
+                <label class="checklist-item">
+                    <input type="checkbox" id="check-choose" disabled>
+                    <span>🎯 Choose</span>
+                </label>
+                <label class="checklist-item">
+                    <input type="checkbox" id="check-create" disabled>
+                    <span>✨ Create</span>
+                </label>
+                <label class="checklist-item">
+                    <input type="checkbox" id="check-commit" disabled>
+                    <span>✅ Commit</span>
+                </label>
+            </div>
+        </aside>
     </div>
 
     <!-- Activity Detail Modal -->

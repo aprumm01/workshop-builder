@@ -109,6 +109,26 @@ function renderWorkshop() {
         const hours = Math.floor(totalMinutes / 60);
         const mins = totalMinutes % 60;
 
+        // Group activities by phase
+        const groupedActivities = {
+            collect: day.activities.filter(a => {
+                const ex = exercises.find(e => e.id === a.id);
+                return ex && ex.phase === 'collect';
+            }),
+            choose: day.activities.filter(a => {
+                const ex = exercises.find(e => e.id === a.id);
+                return ex && ex.phase === 'choose';
+            }),
+            create: day.activities.filter(a => {
+                const ex = exercises.find(e => e.id === a.id);
+                return ex && ex.phase === 'create';
+            }),
+            commit: day.activities.filter(a => {
+                const ex = exercises.find(e => e.id === a.id);
+                return ex && ex.phase === 'commit';
+            })
+        };
+
         dayEl.innerHTML = `
             <div class="day-header">
                 <div class="day-title">${day.label}</div>
@@ -117,21 +137,39 @@ function renderWorkshop() {
                     <span>${hours}h ${mins}m</span>
                 </div>
             </div>
-            <div class="timeline-activities" data-day="${day.day}">
-                ${day.activities.length === 0 ? '<div class="empty-message">Drag activities here</div>' : ''}
+            <div class="phase-sections">
+                <div class="phase-section" data-phase="collect" data-day="${day.day}">
+                    <div class="phase-section-header">📥 Collect</div>
+                    <div class="timeline-activities" data-day="${day.day}" data-phase="collect"></div>
+                </div>
+                <div class="phase-section" data-phase="choose" data-day="${day.day}">
+                    <div class="phase-section-header">🎯 Choose</div>
+                    <div class="timeline-activities" data-day="${day.day}" data-phase="choose"></div>
+                </div>
+                <div class="phase-section" data-phase="create" data-day="${day.day}">
+                    <div class="phase-section-header">✨ Create</div>
+                    <div class="timeline-activities" data-day="${day.day}" data-phase="create"></div>
+                </div>
+                <div class="phase-section" data-phase="commit" data-day="${day.day}">
+                    <div class="phase-section-header">✅ Commit</div>
+                    <div class="timeline-activities" data-day="${day.day}" data-phase="commit"></div>
+                </div>
             </div>
         `;
 
         container.appendChild(dayEl);
 
-        const activitiesContainer = dayEl.querySelector('.timeline-activities');
-        renderActivities(activitiesContainer, day.activities, day.day);
+        // Render activities in each phase section
+        ['collect', 'choose', 'create', 'commit'].forEach(phase => {
+            const phaseContainer = dayEl.querySelector(`.timeline-activities[data-phase="${phase}"]`);
+            renderActivities(phaseContainer, groupedActivities[phase], day.day, phase);
+        });
     });
 
     updateChecklist();
 }
 
-function renderActivities(container, activities, dayId) {
+function renderActivities(container, activities, dayId, phase) {
     activities.forEach((activity, index) => {
         const exercise = exercises.find(e => e.id === activity.id);
         if (!exercise) return;
@@ -141,6 +179,7 @@ function renderActivities(container, activities, dayId) {
         activityEl.draggable = true;
         activityEl.dataset.activityIndex = index;
         activityEl.dataset.dayId = dayId;
+        activityEl.dataset.phase = exercise.phase;
 
         activityEl.innerHTML = `
             <div class="activity-handle">⋮⋮</div>
@@ -177,19 +216,26 @@ function setupDropZone(container) {
 }
 
 function handleToolboxDragStart(e) {
+    const exercise = exercises.find(ex => ex.id === this.dataset.exerciseId);
     draggedData = {
         source: 'toolbox',
-        exerciseId: this.dataset.exerciseId
+        exerciseId: this.dataset.exerciseId,
+        phase: exercise ? exercise.phase : null
     };
     e.dataTransfer.effectAllowed = 'copy';
+
+    // Add visual indicator to dragged element
+    this.classList.add('dragging');
 }
 
 function handleTimelineDragStart(e) {
     draggedElement = this;
+    const exercise = exercises.find(ex => ex.id === this.dataset.exerciseId);
     draggedData = {
         source: 'timeline',
         dayId: parseInt(this.dataset.dayId),
-        activityIndex: parseInt(this.dataset.activityIndex)
+        activityIndex: parseInt(this.dataset.activityIndex),
+        phase: this.dataset.phase
     };
     e.dataTransfer.effectAllowed = 'move';
     this.style.opacity = '0.5';
@@ -199,23 +245,52 @@ function handleDragEnd(e) {
     if (draggedElement) {
         draggedElement.style.opacity = '1';
     }
+
+    // Remove dragging class from toolbox items
+    document.querySelectorAll('.toolbox-activity.dragging').forEach(el => {
+        el.classList.remove('dragging');
+    });
+
+    // Remove all validation states
+    document.querySelectorAll('.timeline-activities').forEach(el => {
+        el.classList.remove('drag-over', 'drag-valid', 'drag-invalid');
+    });
 }
 
 function handleDragOver(e) {
     e.preventDefault();
     e.dataTransfer.dropEffect = draggedData.source === 'toolbox' ? 'copy' : 'move';
+
+    const dropZonePhase = this.dataset.phase;
+    const draggedPhase = draggedData.phase;
+
+    // Add appropriate class based on phase match
     this.classList.add('drag-over');
+
+    if (dropZonePhase && draggedPhase) {
+        if (dropZonePhase === draggedPhase) {
+            this.classList.add('drag-valid');
+            this.classList.remove('drag-invalid');
+        } else {
+            this.classList.add('drag-invalid');
+            this.classList.remove('drag-valid');
+        }
+    }
 }
 
 function handleDragLeave(e) {
-    this.classList.remove('drag-over');
+    // Only remove classes if we're actually leaving the drop zone
+    if (e.target === this) {
+        this.classList.remove('drag-over', 'drag-valid', 'drag-invalid');
+    }
 }
 
 function handleDrop(e) {
     e.preventDefault();
-    this.classList.remove('drag-over');
+    this.classList.remove('drag-over', 'drag-valid', 'drag-invalid');
 
     const targetDayId = parseInt(this.dataset.day);
+    const targetPhase = this.dataset.phase;
 
     if (draggedData.source === 'toolbox') {
         // Add new activity from toolbox
@@ -396,6 +471,21 @@ function setupEventListeners() {
             closeModal();
         }
     });
+}
+
+function saveWorkshop() {
+    WorkshopStorage.saveWorkshop(workshop);
+
+    // Show visual feedback
+    const btn = event.target;
+    const originalText = btn.innerHTML;
+    btn.innerHTML = '✓ Saved';
+    btn.disabled = true;
+
+    setTimeout(() => {
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+    }, 1500);
 }
 
 function exportWorkshop() {
