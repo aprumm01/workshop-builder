@@ -13,6 +13,10 @@
     margin-bottom: 2rem;
 }
 
+.report-header button {
+    min-height: 36px;
+}
+
 .report-content {
     background-color: white;
     padding: 2rem;
