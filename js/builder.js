@@ -342,14 +342,24 @@ function handleDragEnd(e) {
         el.classList.remove('dragging');
     });
 
-    // Remove all validation states
+    // Remove all validation states and drop indicators
     document.querySelectorAll('.timeline-activities').forEach(el => {
         el.classList.remove('drag-over');
     });
 
+    document.querySelectorAll('.timeline-activity').forEach(el => {
+        el.classList.remove('drop-before', 'drop-after');
+    });
+
     // Remove badge
     const badge = document.getElementById('drag-phase-badge');
-    if (badge) badge.remove();
+    if (badge) {
+        badge.remove();
+    }
+
+    // Clear dragged data
+    draggedData = null;
+    draggedElement = null;
 }
 
 // Update badge position during drag

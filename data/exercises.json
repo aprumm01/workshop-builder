@@ -589,6 +589,246 @@
         "Define actions for top priorities"
       ],
       "relatedExercises": ["user-story-mapping", "long-term-goal"]
+    },
+    {
+      "id": "impact-effort-map",
+      "name": "Impact-Effort Map",
+      "icon": "📊",
+      "phase": "choose",
+      "duration": {
+        "min": 20,
+        "max": 35,
+        "default": 25
+      },
+      "description": "Prioritization matrix that plots ideas on two axes: potential impact (value) vs. effort required (cost). Helps teams identify quick wins and avoid low-value time sinks.",
+      "bestFor": [
+        "Prioritizing multiple ideas",
+        "Resource allocation decisions",
+        "Finding quick wins",
+        "Balancing effort vs value"
+      ],
+      "notGoodFor": [
+        "When all ideas are equally important",
+        "Very early divergent thinking",
+        "Single idea evaluation"
+      ],
+      "workshopPhases": ["middle"],
+      "tags": ["prioritization", "decision-making", "strategy", "effort-value"],
+      "recommendIf": {
+        "workshopType": ["strategy", "product", "iteration"],
+        "goals": ["prioritization", "decision-making", "roadmap"],
+        "participants": { "min": 3, "max": 12 }
+      },
+      "materials": ["Large 2x2 grid (Impact high/low, Effort high/low)", "Sticky notes", "Sharpies", "Dot stickers for voting"],
+      "steps": [
+        "Draw 2x2 matrix: Impact (Y-axis) vs Effort (X-axis)",
+        "Review all ideas generated so far",
+        "Discuss each idea's expected impact and effort",
+        "Place ideas on matrix collaboratively",
+        "Identify 'Quick Wins' (high impact, low effort)",
+        "Decide which quadrant to tackle first"
+      ],
+      "relatedExercises": ["hmw", "dot-voting", "priority-cake"]
+    },
+    {
+      "id": "dot-voting",
+      "name": "Dot Voting",
+      "icon": "🔴",
+      "phase": "choose",
+      "duration": {
+        "min": 10,
+        "max": 20,
+        "default": 15
+      },
+      "description": "Quick democratic prioritization method. Each participant gets limited votes (dots) to place on their preferred options. Visually reveals group consensus.",
+      "bestFor": [
+        "Quick group prioritization",
+        "Democratic decision making",
+        "Narrowing down options",
+        "Building consensus"
+      ],
+      "notGoodFor": [
+        "When expert opinion should override",
+        "Complex trade-off decisions",
+        "When all options must be kept"
+      ],
+      "workshopPhases": ["middle"],
+      "tags": ["voting", "prioritization", "decision-making", "consensus"],
+      "recommendIf": {
+        "workshopType": ["strategy", "product", "iteration", "anything-goes"],
+        "goals": ["prioritization", "consensus", "decision-making"],
+        "participants": { "min": 3, "max": 30 }
+      },
+      "materials": ["Dot stickers (3-5 per person)", "Ideas displayed on wall"],
+      "steps": [
+        "Display all options/ideas on wall",
+        "Give each person 3-5 dot stickers",
+        "Explain: place dots on your top choices (can stack multiple dots on one item)",
+        "Everyone votes simultaneously (no discussion during voting)",
+        "Count dots on each option",
+        "Discuss top-voted items"
+      ],
+      "relatedExercises": ["impact-effort-map", "priority-cake", "hmw"]
+    },
+    {
+      "id": "priority-cake",
+      "name": "Priority Cake",
+      "icon": "🎂",
+      "phase": "choose",
+      "duration": {
+        "min": 15,
+        "max": 30,
+        "default": 20
+      },
+      "description": "Visual prioritization using a 3-tier cake metaphor. Top tier = highest priority (smallest, most precious), middle tier = medium priority, bottom tier = lowest priority (largest, foundational). Limits force tough choices.",
+      "bestFor": [
+        "Forced ranking exercises",
+        "Visual priority communication",
+        "Limiting scope creep",
+        "Stakeholder alignment"
+      ],
+      "notGoodFor": [
+        "When priorities are equal",
+        "Very early exploration",
+        "Technical dependency ordering"
+      ],
+      "workshopPhases": ["middle"],
+      "tags": ["prioritization", "visual", "ranking", "scope"],
+      "recommendIf": {
+        "workshopType": ["product", "strategy", "iteration"],
+        "goals": ["prioritization", "scope-definition", "alignment"],
+        "participants": { "min": 3, "max": 12 }
+      },
+      "materials": ["Large cake drawing with 3 tiers", "Sticky notes with ideas", "Tape"],
+      "steps": [
+        "Draw or print a 3-tier cake (top = 3 slots, middle = 6 slots, bottom = 10 slots)",
+        "Review all ideas/features from previous exercises",
+        "Discuss: What MUST be in top tier? What can wait?",
+        "Place ideas in tiers based on priority",
+        "If tiers overflow, force cuts or demotions",
+        "Document final priority order"
+      ],
+      "relatedExercises": ["dot-voting", "impact-effort-map", "long-term-goal"]
+    },
+    {
+      "id": "can-we-questions",
+      "name": "Can We Questions",
+      "icon": "❓",
+      "phase": "create",
+      "duration": {
+        "min": 15,
+        "max": 25,
+        "default": 20
+      },
+      "description": "Feasibility check for promising ideas. Converts 'How Might We' questions into 'Can We' reality checks. Surfaces constraints, dependencies, and risks early before committing resources.",
+      "bestFor": [
+        "Feasibility assessment",
+        "Risk identification",
+        "Reality checking ideas",
+        "Identifying blockers"
+      ],
+      "notGoodFor": [
+        "Pure ideation (kills creativity)",
+        "When you want radical thinking",
+        "Very early divergent phase"
+      ],
+      "workshopPhases": ["middle", "end"],
+      "tags": ["feasibility", "risk", "constraints", "reality-check"],
+      "recommendIf": {
+        "workshopType": ["product", "iteration", "anything-goes"],
+        "goals": ["feasibility", "risk-assessment", "implementation-planning"],
+        "participants": { "min": 3, "max": 10 }
+      },
+      "materials": ["HMW questions from earlier", "Sticky notes", "Sharpies"],
+      "steps": [
+        "Select top 3-5 HMW questions or concepts",
+        "For each, ask: 'Can we actually do this?'",
+        "Identify constraints: technical, budget, time, resources, skills",
+        "List dependencies and risks",
+        "Rate feasibility: Easy / Medium / Hard",
+        "Decide: proceed, modify, or park"
+      ],
+      "relatedExercises": ["hmw", "impact-effort-map", "rrec-canvas"]
+    },
+    {
+      "id": "art-gallery",
+      "name": "Art Gallery",
+      "icon": "🖼️",
+      "phase": "create",
+      "duration": {
+        "min": 30,
+        "max": 45,
+        "default": 35
+      },
+      "description": "Silent gallery walk where teams display their HMW solutions visually. Participants tour the 'gallery' leaving feedback on sticky notes. Creates space for reflection before discussion.",
+      "bestFor": [
+        "Reviewing multiple solutions",
+        "Quiet individual feedback",
+        "Cross-team inspiration",
+        "Building on ideas"
+      ],
+      "notGoodFor": [
+        "When time is very limited",
+        "Small number of ideas",
+        "When verbal discussion is needed immediately"
+      ],
+      "workshopPhases": ["middle"],
+      "tags": ["review", "feedback", "silent", "visual"],
+      "recommendIf": {
+        "workshopType": ["product", "iteration", "anything-goes"],
+        "goals": ["feedback", "ideation", "collaboration"],
+        "participants": { "min": 6, "max": 30 }
+      },
+      "materials": ["Wall space", "Sketches/concepts on poster paper", "Sticky notes (3 colors: likes, concerns, ideas)", "Sharpies", "Dot stickers"],
+      "steps": [
+        "Teams display their HMW solutions on walls (sketches, storyboards, concepts)",
+        "Everyone gets sticky notes in 3 colors: Green (likes), Yellow (concerns), Pink (new ideas)",
+        "Silent gallery walk: tour all displays, leave feedback on stickies",
+        "After gallery walk, teams return to their work and read feedback",
+        "Quick shareout: biggest surprises or insights",
+        "Optional: dot vote on favorite concepts"
+      ],
+      "relatedExercises": ["hmw", "lightning-demos", "concept-creation"]
+    },
+    {
+      "id": "group-intros",
+      "name": "Group Introductions",
+      "icon": "👋",
+      "phase": "collect",
+      "duration": {
+        "min": 10,
+        "max": 20,
+        "default": 15
+      },
+      "description": "Structured icebreaker to build psychological safety. Each person shares name, role, and a fun prompt (e.g., 'favorite productivity hack' or 'a problem you're passionate about solving').",
+      "bestFor": [
+        "Workshop kickoff",
+        "Building rapport",
+        "Creating psychological safety",
+        "New team formations"
+      ],
+      "notGoodFor": [
+        "Teams that already know each other well",
+        "When time is extremely limited",
+        "Mid-workshop energy boost"
+      ],
+      "workshopPhases": ["beginning"],
+      "tags": ["icebreaker", "team-building", "kickoff", "safety"],
+      "recommendIf": {
+        "workshopType": ["strategy", "product", "iteration", "anything-goes"],
+        "goals": ["team-building", "alignment", "kickoff"],
+        "participants": { "min": 3, "max": 20 }
+      },
+      "materials": ["None (or optional: name tags, fun props)"],
+      "steps": [
+        "Explain intro format: Name, Role, Answer to prompt",
+        "Choose a prompt relevant to workshop theme (e.g., 'What problem brought you here?', 'Favorite product feature?')",
+        "Go around circle, each person introduces themselves (~30-60 sec each)",
+        "Optional: facilitator models first to set tone",
+        "Thank everyone for sharing",
+        "Transition to workshop goals"
+      ],
+      "relatedExercises": ["expert-interview", "long-term-goal", "sailboat-retro"]
     }
   ]
 }
