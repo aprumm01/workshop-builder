@@ -222,8 +222,11 @@ body {
 }
 
 .toolbox-activity.dragging {
-    opacity: 0.6;
-    transform: scale(0.95);
+    opacity: 0.5;
+    transform: scale(0.98);
+    background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+    color: white;
+    box-shadow: 0 8px 32px rgba(13, 148, 136, 0.4);
 }
 
 .toolbox-activity.hidden {
@@ -287,17 +290,32 @@ body {
 }
 
 .back-link {
-    color: var(--text-medium);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-dark);
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 600;
     transition: all var(--transition-fast);
-    padding: 0.5rem;
-    border-radius: 0.375rem;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    background: linear-gradient(135deg, var(--bg-white) 0%, var(--bg-light) 100%);
+    border: 2px solid var(--border);
+    font-size: 0.9375rem;
+}
+
+.back-link::before {
+    content: '←';
+    font-size: 1.25rem;
+    font-weight: 700;
 }
 
 .back-link:hover {
     color: var(--primary);
-    background-color: var(--bg-light);
+    background: linear-gradient(135deg, var(--bg-light) 0%, var(--bg-white) 100%);
+    border-color: var(--primary);
+    transform: translateX(-2px);
+    box-shadow: 0 2px 8px rgba(13, 148, 136, 0.1);
 }
 
 .header-title {
@@ -421,8 +439,10 @@ body {
     background: linear-gradient(135deg, #F0FDFA 0%, #CCFBF1 100%);
     border-color: var(--primary);
     border-style: solid;
-    box-shadow: inset 0 0 0 2px rgba(13, 148, 136, 0.1);
-    transform: scale(1.01);
+    border-width: 3px;
+    box-shadow: inset 0 0 0 4px rgba(13, 148, 136, 0.2), 0 8px 24px rgba(13, 148, 136, 0.3);
+    transform: scale(1.02);
+    animation: pulse 1s ease-in-out infinite;
 }
 
 /* Drag phase badge */
@@ -451,8 +471,14 @@ body {
 }
 
 @keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.8;
+    }
 }
 
 /* Phase warning badge */
@@ -557,41 +583,72 @@ body {
     box-shadow: 0 2px 8px rgba(13, 148, 136, 0.2);
 }
 
+.timeline-activity.dragging {
+    opacity: 0.5;
+    transform: scale(1.02);
+    background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+    color: white;
+    box-shadow: 0 12px 40px rgba(13, 148, 136, 0.5);
+    border-color: var(--primary);
+    z-index: 100;
+}
+
+.timeline-activity.dragging .activity-name,
+.timeline-activity.dragging .activity-meta {
+    color: white;
+}
+
 /* Drop position indicators with animated spacing */
 .timeline-activity.drop-before {
-    margin-top: 2.5rem;
+    margin-top: 5rem;
     transition: margin-top var(--transition-spring);
 }
 
 .timeline-activity.drop-before::after {
-    content: '';
+    content: '↓ Drop here';
     position: absolute;
-    top: -2rem;
-    left: 0;
-    right: 0;
-    height: 4px;
+    top: -3.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 6px;
+    width: calc(100% - 2rem);
     background: linear-gradient(90deg, var(--primary), var(--primary-light));
-    border-radius: 2px;
-    box-shadow: 0 0 12px rgba(13, 148, 136, 0.4);
-    animation: slideIn 0.2s ease-out;
+    border-radius: 3px;
+    box-shadow: 0 0 20px rgba(13, 148, 136, 0.6);
+    animation: slideIn 0.2s ease-out, pulse 1s ease-in-out infinite;
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 0.875rem;
+    line-height: 1;
+    padding-top: 1rem;
+    text-align: center;
 }
 
 .timeline-activity.drop-after {
-    margin-bottom: 2.5rem;
+    margin-bottom: 5rem;
     transition: margin-bottom var(--transition-spring);
 }
 
 .timeline-activity.drop-after::after {
-    content: '';
+    content: '↓ Drop here';
     position: absolute;
-    bottom: -2rem;
-    left: 0;
-    right: 0;
-    height: 4px;
+    bottom: -3.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 6px;
+    width: calc(100% - 2rem);
     background: linear-gradient(90deg, var(--primary), var(--primary-light));
-    border-radius: 2px;
-    box-shadow: 0 0 12px rgba(13, 148, 136, 0.4);
-    animation: slideIn 0.2s ease-out;
+    border-radius: 3px;
+    box-shadow: 0 0 20px rgba(13, 148, 136, 0.6);
+    animation: slideIn 0.2s ease-out, pulse 1s ease-in-out infinite;
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 0.875rem;
+    line-height: 1;
+    padding-bottom: 1rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column-reverse;
 }
 
 @keyframes slideIn {
