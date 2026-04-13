@@ -181,24 +181,20 @@ body {
     background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
     border: 2px solid var(--border);
     border-radius: 0.5rem;
-    cursor: default;
     transition: all var(--transition-normal);
+    opacity: 0.5;
 }
 
-.checklist-item input[type="checkbox"]:checked ~ span {
-    color: var(--success);
-    font-weight: 600;
-}
-
-.checklist-item:has(input:checked) {
+.checklist-item.covered {
+    opacity: 1;
     background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
     border-color: var(--success);
     box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
 }
 
-.checklist-item input[type="checkbox"] {
-    width: 20px;
-    height: 20px;
+.checklist-item.covered span {
+    color: var(--success);
+    font-weight: 600;
 }
 
 .checklist-item span {
@@ -585,7 +581,8 @@ body {
 }
 
 .timeline-activity {
-    display: flex;
+    display: grid;
+    grid-template-columns: auto auto 1fr auto;
     align-items: center;
     gap: 1rem;
     padding: 1rem;
@@ -626,14 +623,8 @@ body {
 }
 
 .timeline-activity.dragging {
-    opacity: 0.6;
-    transform: scale(1.05) rotate(-2deg);
-    background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
-    color: white;
-    box-shadow: 0 16px 48px rgba(13, 148, 136, 0.6);
-    border-color: var(--primary);
-    z-index: 100;
-    cursor: grabbing;
+    opacity: 0 !important;
+    pointer-events: none;
 }
 
 .timeline-activity.dragging .activity-name,
@@ -793,6 +784,52 @@ body {
     gap: 0.5rem;
 }
 
+.activity-suggestion {
+    grid-column: 1 / -1;
+    margin-top: 0.5rem;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+}
+
+.suggestion-icon {
+    font-size: 0.9rem;
+    flex-shrink: 0;
+    opacity: 0.7;
+}
+
+.suggestion-text {
+    color: var(--text-medium);
+    font-weight: 400;
+}
+
+.suggestion-add-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0;
+    background: none;
+    color: var(--primary);
+    border: none;
+    font-weight: 600;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    text-decoration: none;
+}
+
+.suggestion-add-btn:hover {
+    color: #0D9488;
+    text-decoration: underline;
+}
+
+.suggestion-add-btn i {
+    width: 14px;
+    height: 14px;
+}
+
 .action-btn {
     padding: 0.5rem;
     background-color: var(--bg-white);
@@ -941,3 +978,16 @@ body {
     font-weight: 500;
     color: var(--text-dark);
 }
+
+.sortable-ghost {
+    opacity: 0.4 !important;
+    background: #14B8A6 !important;
+}
+
+.sortable-drag {
+    opacity: 1 !important;
+    transform: scale(1.05);
+    box-shadow: 0 8px 24px rgba(13, 148, 136, 0.4);
+    cursor: grabbing !important;
+}
+

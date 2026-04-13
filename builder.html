@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/builder.css">
+    <link rel="stylesheet" href="css/builder.css?v=2">
 </head>
 <body>
     <div class="builder-container">
@@ -36,7 +36,7 @@
         <main class="builder-main">
             <header class="builder-header">
                 <div class="header-left">
-                    <a href="index.html" class="back-link" title="Back to homepage">← Home</a>
+                    <a href="index.html" class="back-link" title="Back to homepage"><i data-lucide="arrow-left"></i> Home</a>
                     <div class="header-title">
                         <h1 id="workshopTitle">Workshop Builder</h1>
                         <p class="client-info" id="clientInfo"></p>
@@ -54,29 +54,29 @@
             </div>
         </main>
 
-        <!-- Right Sidebar: 4C's Checklist -->
+        <!-- Right Sidebar: 4C's Coverage -->
         <aside class="checklist-sidebar">
             <div class="checklist-header">
-                <h4>4C's Checklist</h4>
+                <h4>4C's Coverage</h4>
                 <p>Ensure your workshop covers all phases</p>
             </div>
             <div class="checklist" id="fourCsChecklist">
-                <label class="checklist-item">
-                    <input type="checkbox" id="check-collect" disabled>
-                    <span><i data-lucide="inbox" style="display: inline; width: 16px; height: 16px; vertical-align: text-bottom; margin-right: 0.5rem;"></i>Collect</span>
-                </label>
-                <label class="checklist-item">
-                    <input type="checkbox" id="check-choose" disabled>
-                    <span><i data-lucide="target" style="display: inline; width: 16px; height: 16px; vertical-align: text-bottom; margin-right: 0.5rem;"></i>Choose</span>
-                </label>
-                <label class="checklist-item">
-                    <input type="checkbox" id="check-create" disabled>
-                    <span><i data-lucide="sparkles" style="display: inline; width: 16px; height: 16px; vertical-align: text-bottom; margin-right: 0.5rem;"></i>Create</span>
-                </label>
-                <label class="checklist-item">
-                    <input type="checkbox" id="check-commit" disabled>
-                    <span><i data-lucide="check-circle" style="display: inline; width: 16px; height: 16px; vertical-align: text-bottom; margin-right: 0.5rem;"></i>Commit</span>
-                </label>
+                <div class="checklist-item" id="check-collect">
+                    <i data-lucide="inbox" style="display: inline; width: 16px; height: 16px; vertical-align: text-bottom; margin-right: 0.5rem;"></i>
+                    <span>Collect</span>
+                </div>
+                <div class="checklist-item" id="check-choose">
+                    <i data-lucide="target" style="display: inline; width: 16px; height: 16px; vertical-align: text-bottom; margin-right: 0.5rem;"></i>
+                    <span>Choose</span>
+                </div>
+                <div class="checklist-item" id="check-create">
+                    <i data-lucide="sparkles" style="display: inline; width: 16px; height: 16px; vertical-align: text-bottom; margin-right: 0.5rem;"></i>
+                    <span>Create</span>
+                </div>
+                <div class="checklist-item" id="check-commit">
+                    <i data-lucide="check-circle" style="display: inline; width: 16px; height: 16px; vertical-align: text-bottom; margin-right: 0.5rem;"></i>
+                    <span>Commit</span>
+                </div>
             </div>
         </aside>
     </div>
@@ -94,10 +94,11 @@
         </div>
     </div>
 
-    <script src="js/storage.js"></script>
-    <script src="js/icon-map.js"></script>
+    <script src="js/storage.js?v=1776092780"></script>
+    <script src="js/icon-map.js?v=1776092780"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-    <script src="js/builder.js"></script>
+    <script src="js/builder.js?v=1776092780"></script>
     <script>
         // Initialize Lucide icons after page load
         document.addEventListener('DOMContentLoaded', () => {

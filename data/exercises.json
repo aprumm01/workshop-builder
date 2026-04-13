@@ -441,6 +441,10 @@
         "default": 25
       },
       "description": "Reframe problems into opportunities by converting insights into actionable 'How Might We' questions. Transforms constraints into creative challenges.",
+      "suggestedNext": {
+        "activityId": "dot-voting",
+        "reason": "Vote to prioritize top HMW questions"
+      },
       "bestFor": [
         "Problem reframing",
         "Opening up solution space",
@@ -641,6 +645,10 @@
         "default": 15
       },
       "description": "Quick democratic prioritization method. Each participant gets limited votes (dots) to place on their preferred options. Visually reveals group consensus.",
+      "suggestedNext": {
+        "activityId": "priority-cake",
+        "reason": "Uses voting results to prioritize in quadrants"
+      },
       "bestFor": [
         "Quick group prioritization",
         "Democratic decision making",
@@ -714,13 +722,17 @@
       "id": "can-we-questions",
       "name": "Can We Questions",
       "icon": "❓",
-      "phase": "create",
+      "phase": "collect",
       "duration": {
         "min": 15,
         "max": 25,
         "default": 20
       },
       "description": "Feasibility check for promising ideas. Converts 'How Might We' questions into 'Can We' reality checks. Surfaces constraints, dependencies, and risks early before committing resources.",
+      "suggestedNext": {
+        "activityId": "dot-voting",
+        "reason": "Vote to prioritize feasible questions"
+      },
       "bestFor": [
         "Feasibility assessment",
         "Risk identification",
@@ -829,6 +841,38 @@
         "Transition to workshop goals"
       ],
       "relatedExercises": ["expert-interview", "long-term-goal", "sailboat-retro"]
+    },
+    {
+      "id": "custom-activity",
+      "name": "Bring Your Own Activity",
+      "icon": "✏️",
+      "phase": "collect",
+      "duration": {
+        "min": 15,
+        "max": 180,
+        "default": 30
+      },
+      "description": "Add any custom activity not listed in the toolbox. This is your wildcard for specialized exercises, unique methods, or activities specific to your workshop needs.",
+      "bestFor": [
+        "Specialized activities",
+        "Industry-specific methods",
+        "Custom exercises",
+        "Experimental approaches"
+      ],
+      "notGoodFor": [],
+      "workshopPhases": ["beginning", "middle", "end"],
+      "tags": ["custom", "flexible", "wildcard"],
+      "recommendIf": {
+        "workshopType": ["strategy", "product", "iteration", "anything-goes"]
+      },
+      "materials": ["Depends on your activity"],
+      "steps": [
+        "Define your custom activity",
+        "Prepare necessary materials",
+        "Set clear time boundaries",
+        "Facilitate as needed"
+      ],
+      "relatedExercises": []
     }
   ]
 }
